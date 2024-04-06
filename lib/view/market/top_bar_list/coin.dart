@@ -49,7 +49,6 @@ class _CoinPageState extends State<CoinPage> with TickerProviderStateMixin {
         return StreamBuilder(
           stream: marketViewModel.getMarketData(),
           builder: (context, AsyncSnapshot snapshot) {
-            print(snapshot.data);
             if (snapshot.hasData) {
               List<Market> coins = snapshot.data;
               return ListView.separated(

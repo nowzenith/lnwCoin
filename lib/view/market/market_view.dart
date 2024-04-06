@@ -12,7 +12,8 @@ import 'package:lnwCoin/view/market/top_bar_list/watchlist.dart';
 import 'package:lnwCoin/view_model/market_view_model.dart';
 import 'package:flutter/material.dart';
 import 'package:simple_gradient_text/simple_gradient_text.dart';
-
+import 'package:internet_connection_checker/internet_connection_checker.dart';
+import 'dart:async';
 import '../../utils/constants.dart';
 part 'components/news_carousel.dart';
 part 'components/app_bar.dart';
@@ -25,6 +26,34 @@ class MarketView extends StatefulWidget {
 }
 
 class _MarketViewState extends State<MarketView> with TickerProviderStateMixin {
+  bool? _isConnected;
+  Timer? _timer;
+
+  Future<void> _checkInternetConnection() async {
+    bool result = await InternetConnectionChecker().hasConnection;
+    if (mounted) {
+      // Check if the widget is still in the widget tree
+      setState(() {
+        _isConnected = result;
+      });
+    }
+    if (!result) {
+      Future.delayed(const Duration(seconds: 5), () {
+        // This block of code will be executed after a 2-second delay.
+        if (mounted) {
+          // Check again before making recursive call
+          _checkInternetConnection();
+        }
+      });
+    }
+  }
+
+  void _handleTabSelection() {
+    if (_tabController.indexIsChanging) {
+      _checkInternetConnection();
+    }
+  }
+
   late TabController _tabController;
   final List<Widget> pages = [
     const CoinPage(),
@@ -41,11 +70,15 @@ class _MarketViewState extends State<MarketView> with TickerProviderStateMixin {
     print("market_view");
     super.initState();
     _tabController = TabController(length: 7, vsync: this);
+    _tabController.addListener(_handleTabSelection);
+    _checkInternetConnection();
   }
 
   @override
   void dispose() {
     _tabController.dispose();
+    _tabController.removeListener(_handleTabSelection);
+    _timer?.cancel();
     super.dispose();
   }
 
@@ -55,19 +88,31 @@ class _MarketViewState extends State<MarketView> with TickerProviderStateMixin {
       children: [
         const BackgroundImage(),
         Scaffold(
-          appBar: _AppBar(),
+          appBar: const _AppBar(),
           backgroundColor: Colors.transparent,
           body: Column(
             children: [
-              MarketStatsWidget(),
+              const MarketStatsWidget(),
               TopBarWidget(tabController: _tabController),
               const SizedBox(
                 height: 14,
               ),
               // const CoinPage()
-              Expanded(
-                  child:
-                      TabBarView(controller: _tabController, children: pages)),
+              _isConnected == null
+                  ? const Text('Checking connection...',
+                      style: TextStyle(
+                        fontSize: 20,
+                        color: Colors.white,
+                      ))
+                  : _isConnected!
+                      ? Expanded(
+                          child: TabBarView(
+                              controller: _tabController, children: pages))
+                      : const Text("Can't access the internet, Please connect to the internet network.",
+                          style: TextStyle(
+                            fontSize: 20,
+                            color: Colors.white,
+                          ))
             ],
           ),
         ),

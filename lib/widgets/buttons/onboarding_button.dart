@@ -41,7 +41,7 @@ class OnBoardingButton extends StatelessWidget {
                 )
               : const Center(
                   child: Text(
-                    "Start trading",
+                    "Start lnwCoin",
                     style: TextStyle(fontSize: 20),
                   ),
                 ),

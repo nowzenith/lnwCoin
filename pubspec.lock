@@ -145,6 +145,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.0.7"
+  coingecko_api:
+    dependency: "direct main"
+    description:
+      name: coingecko_api
+      sha256: d6fbef6c9dd49c6c9f1456515fdf528c3314493c640b2b4190f1a32653407a92
+      url: "https://pub.dev"
+    source: hosted
+    version: "1.1.0+2"
   collection:
     dependency: transitive
     description:
@@ -377,7 +385,7 @@ packages:
     source: hosted
     version: "0.15.4"
   http:
-    dependency: transitive
+    dependency: "direct main"
     description:
       name: http
       sha256: "761a297c042deedc1ffbb156d6e2af13886bb305c2a343a4d972504cd67dd938"
@@ -408,6 +416,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "4.1.7"
+  internet_connection_checker:
+    dependency: "direct main"
+    description:
+      name: internet_connection_checker
+      sha256: "1c683e63e89c9ac66a40748b1b20889fd9804980da732bf2b58d6d5456c8e876"
+      url: "https://pub.dev"
+    source: hosted
+    version: "1.0.0+1"
   intl:
     dependency: "direct main"
     description:

@@ -18,6 +18,7 @@ class NewsService extends INewsService {
       final response = await _dio.get(_pathNews);
 
       if (response.statusCode == HttpStatus.ok) {
+        print(response.data);
         return response.data;
       } else {
         log("Status Code: ${response.statusCode} \n Status Message: ${response.statusMessage}");
