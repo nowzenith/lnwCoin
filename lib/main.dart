@@ -31,7 +31,7 @@ class MyApp extends StatelessWidget {
         theme: ThemeData(
           primarySwatch: Colors.blue,
           visualDensity: VisualDensity.adaptivePlatformDensity,
-          fontFamily: "MontserratAlternates",
+          fontFamily: "Orbitron",
           bottomNavigationBarTheme: const BottomNavigationBarThemeData(
             backgroundColor: Colors.black,
           ),
