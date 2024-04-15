@@ -6,6 +6,7 @@ import 'package:lnwCoin/view/market/top_bar_list/categories/categories.dart';
 import 'package:lnwCoin/view/market/top_bar_list/chains/chains.dart';
 import 'package:lnwCoin/view/market/top_bar_list/coin.dart';
 import 'package:lnwCoin/view/market/top_bar_list/exchange/exchange.dart';
+import 'package:lnwCoin/view/market/top_bar_list/metaverse.dart';
 import 'package:lnwCoin/view/market/top_bar_list/nft/nft.dart';
 import 'package:lnwCoin/view/market/top_bar_list/overview.dart';
 import 'package:lnwCoin/view/market/top_bar_list/watchlist.dart';
@@ -63,13 +64,14 @@ class _MarketViewState extends State<MarketView> with TickerProviderStateMixin {
     const ExchangePage(),
     const ChainsPage(),
     const CategoriesPage(),
+    const Metaverse_page(),
   ];
 
   @override
   void initState() {
     print("market_view");
     super.initState();
-    _tabController = TabController(length: 7, vsync: this);
+    _tabController = TabController(length: 8, vsync: this);
     _tabController.addListener(_handleTabSelection);
     _checkInternetConnection();
   }
