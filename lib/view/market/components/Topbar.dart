@@ -22,21 +22,20 @@ class _TopBarWidgetState extends State<TopBarWidget> {
           Material(
             color: Colors.transparent,
             child: TabBar(
-              controller: widget.tabController,
-              isScrollable: true,
-              labelPadding: const EdgeInsets.fromLTRB(10, 0, 10, 0),
-              tabs: const [
-                Tab(text: 'Coin'),
-                Tab(text: 'Watchlist'),
-                Tab(text: 'Overview'),
-                Tab(text: 'NFT'),
-                Tab(text: 'Exchanges'),
-                Tab(text: 'Chains'),
-                Tab(text: 'Categories'),
-              ],
-              labelColor: Colors.white,
-              indicatorColor: Colors.green,
-            ),
+                controller: widget.tabController,
+                isScrollable: true,
+                labelPadding: const EdgeInsets.fromLTRB(10, 0, 10, 0),
+                tabs: const [
+                  Tab(text: 'Coin'),
+                  Tab(text: 'Watchlist'),
+                  Tab(text: 'Overview'),
+                  Tab(text: 'NFT'),
+                  Tab(text: 'Exchanges'),
+                  Tab(text: 'Chains'),
+                  Tab(text: 'Categories'),
+                ],
+                labelColor: Colors.white,
+                indicatorColor: Color.fromARGB(255, 170, 0, 28)),
           ),
           // This Expanded widget lets the TabBarView take up the remaining space.
           Expanded(
