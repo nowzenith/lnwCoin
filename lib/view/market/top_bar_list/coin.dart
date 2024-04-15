@@ -1,11 +1,15 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
+import 'package:lnwCoin/model/crypto_model.dart';
 import 'package:lnwCoin/model/market_model.dart';
+import 'package:lnwCoin/service/coingecko/coingecko_api.dart';
 import 'package:lnwCoin/utils/extensions/lottie_extension.dart';
 import 'package:lnwCoin/view_model/market_view_model.dart';
 import 'package:lottie/lottie.dart';
 import 'package:provider/provider.dart';
+import 'package:chart_sparkline/chart_sparkline.dart';
 
 part '../components/market_data_card.dart';
 
@@ -19,11 +23,13 @@ class CoinPage extends StatefulWidget {
 class _CoinPageState extends State<CoinPage> with TickerProviderStateMixin {
   late AnimationController _animationController;
   Timer? _timer; // Define a Timer object
+  late Future<List<CryptoCurrency>> futureCurrencies;
   @override
   void initState() {
     print("coin_view");
     _animationController = AnimationController(
         vsync: this, duration: const Duration(milliseconds: 3000));
+    futureCurrencies = CoinGeckoApi().fetchCurrencies();  // Initialize data fetch on load
     super.initState();
   }
 
@@ -38,19 +44,19 @@ class _CoinPageState extends State<CoinPage> with TickerProviderStateMixin {
   Widget build(BuildContext context) {
     return Consumer<MarketViewModel>(
       builder: (context, marketViewModel, child) {
-        _timer = Timer.periodic(const Duration(seconds: 300), (timer) async {
-          try {
-            await marketViewModel.getMarketData();
-            setState(() {});
-          } catch (e) {
-            print(e);
-          }
-        });
-        return StreamBuilder(
-          stream: marketViewModel.getMarketData(),
+        // _timer = Timer.periodic(const Duration(seconds: 300), (timer) async {
+        //   try {
+        //     await marketViewModel.getMarketData();
+        //     setState(() {});
+        //   } catch (e) {
+        //     print(e);
+        //   }
+        // });
+        return FutureBuilder<List<CryptoCurrency>>(
+          future: futureCurrencies,
           builder: (context, AsyncSnapshot snapshot) {
             if (snapshot.hasData) {
-              List<Market> coins = snapshot.data;
+              List<CryptoCurrency> coins = snapshot.data;
               return ListView.separated(
                 itemBuilder: (context, index) {
                   return _MarketDataCard(

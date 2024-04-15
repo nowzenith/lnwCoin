@@ -121,24 +121,3 @@ class _MarketViewState extends State<MarketView> with TickerProviderStateMixin {
     );
   }
 }
-
-
-
-/*
-StreamBuilder(
-            stream: marketViewModel.getMarketData(),
-            builder: (context, AsyncSnapshot snapshot) {
-              if (snapshot.hasData) {
-                List<Market> markets = snapshot.data;
-                return Center(
-                  child: Text(markets[0].symbol),
-                );
-              } else {
-                return const Center(
-                    child: CircularProgressIndicator(
-                  color: Colors.greenAccent,
-                ));
-              }
-            },
-          );
- */
