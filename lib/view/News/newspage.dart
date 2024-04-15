@@ -107,7 +107,7 @@ class _NewsFeedPageState extends State<NewsFeedPage>
                                 summary: article[
                                     'description'], // Adjust according to your data structure
                                 imageUrl: article['urlToImage'] ??
-                                    "https://via.placeholder.com/150", // Adjust according to your data structure
+                                    "https://builtin.com/sites/www.builtin.com/files/styles/ckeditor_optimize/public/inline-images/inside-crypto-cryptocurrency.png", // Adjust according to your data structure
                                 date: DateTime.parse(article[
                                     'publishedAt']), // Adjust according to your data structure
                                 url: article['url'],
@@ -166,28 +166,40 @@ class MyNewsCard extends StatelessWidget {
       color: Colors.grey[850], // Card widget background color
       margin: const EdgeInsets.all(8),
       child: ListTile(
-        leading: Image.network(
-          imageUrl,
+        leading: Container(
           width: 100,
           height: 100,
-          fit: BoxFit.cover,
-          loadingBuilder: (BuildContext context, Widget child,
-              ImageChunkEvent? loadingProgress) {
-            if (loadingProgress == null) return child;
-            return Center(
-              child: CircularProgressIndicator(
-                value: loadingProgress.expectedTotalBytes != null
-                    ? loadingProgress.cumulativeBytesLoaded /
-                        loadingProgress.expectedTotalBytes!
-                    : null,
-              ),
-            );
-          },
-          errorBuilder:
-              (BuildContext context, Object exception, StackTrace? stackTrace) {
-            return const Icon(Icons.error,
-                color: Colors.white); // Error icon color is white
-          },
+          child: Image.network(
+            imageUrl,
+            fit: BoxFit.cover,
+            loadingBuilder: (BuildContext context, Widget child,
+                ImageChunkEvent? loadingProgress) {
+              if (loadingProgress == null) return child;
+              return Center(
+                child: CircularProgressIndicator(
+                  value: loadingProgress.expectedTotalBytes != null
+                      ? loadingProgress.cumulativeBytesLoaded /
+                          loadingProgress.expectedTotalBytes!
+                      : null,
+                ),
+              );
+            },
+            errorBuilder: (BuildContext context, Object exception,
+                StackTrace? stackTrace) {
+              // Fallback to another image URL when the primary image fails to load
+              return Image.network(
+                "https://builtin.com/sites/www.builtin.com/files/styles/ckeditor_optimize/public/inline-images/inside-crypto-cryptocurrency.png",
+                width: 100,
+                height: 100,
+                fit: BoxFit.cover,
+                errorBuilder: (BuildContext context, Object exception,
+                    StackTrace? stackTrace) {
+                  // If the fallback image also fails to load, show an error icon
+                  return const Icon(Icons.error, color: Colors.white);
+                },
+              );
+            },
+          ),
         ),
         title: Text(
           title,
