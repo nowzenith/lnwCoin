@@ -22,7 +22,8 @@ class _OnBoardingViewState extends State<OnBoardingView> {
             image: DecorationImage(
                 image: onBoardingBackgroundImage,
                 fit: BoxFit.cover,
-                colorFilter: ColorFilter.mode(Color.fromARGB(255, 21, 21, 21), BlendMode.darken)),
+                colorFilter: ColorFilter.mode(
+                    Color.fromARGB(255, 21, 21, 21), BlendMode.darken)),
           ),
           child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 10),
@@ -45,15 +46,21 @@ class _OnBoardingViewState extends State<OnBoardingView> {
                       controller: onBoardingViewModel.pageController,
                       count: 3,
                       effect: const ExpandingDotsEffect(
-                          activeDotColor: Colors.greenAccent,
+                          activeDotColor: const Color.fromARGB(255, 170, 0, 28),
                           dotColor: Colors.white,
                           dotHeight: 8,
                           dotWidth: 16),
                     )),
 
                 onBoardingViewModel.onLastPage
-                    ? OnBoardingButton(onTap: () => onBoardingViewModel.navigateToHome(context), label: "Start trading")
-                    : OnBoardingButton(onTap: () => onBoardingViewModel.nextPage(), label: "Next"),
+                    ? OnBoardingButton(
+                        onTap: () =>
+                            onBoardingViewModel.navigateToHome(context),
+                        label: "Start trading")
+                    : OnBoardingButton(
+                        onTap: () => onBoardingViewModel.nextPage(),
+                        label: "Next",
+                      ),
               ],
             ),
           ),
