@@ -38,9 +38,9 @@ class BottomBarView extends StatelessWidget {
             return Scaffold(
               body: pages[bottomBarViewModel.index],
               bottomNavigationBar: CurvedNavigationBar(
-                backgroundColor: const Color.fromARGB(255, 24, 24, 24),
-                buttonBackgroundColor: Colors.green,
-                color: Colors.green,
+                backgroundColor: Color.fromARGB(255, 24, 24, 24),
+                buttonBackgroundColor: const Color.fromARGB(255, 170, 0, 28),
+                color: const Color.fromARGB(255, 170, 0, 28),
                 animationDuration: const Duration(milliseconds: 300),
                 onTap: (value) {
                   bottomBarViewModel.changePage(value);
