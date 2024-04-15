@@ -46,7 +46,7 @@ class MarketStatCard extends StatelessWidget {
       margin: const EdgeInsets.all(4),
       padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 12),
       decoration: BoxDecoration(
-        color: const Color.fromARGB(255, 12, 18, 70),
+        color: const Color.fromARGB(255, 170, 0, 28),
         borderRadius: BorderRadius.circular(8),
       ),
       child: Column(

@@ -29,8 +29,7 @@ class HalvingCountdown extends StatelessWidget {
     return Container(
       padding: EdgeInsets.symmetric(horizontal: 12, vertical: 6),
       decoration: BoxDecoration(
-        color: Color(
-            0xFF1A237E), // Dark blue color, replace with actual color code
+        color: const Color.fromARGB(255, 170, 0, 28), // Dark blue color, replace with actual color code
         borderRadius: BorderRadius.circular(20),
       ),
       child: Center(
@@ -46,12 +45,12 @@ class HalvingCountdown extends StatelessWidget {
                   TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
             ),
             VerticalDivider(color: Colors.white54),
-            IconButton(
-              icon: Icon(Icons.settings, color: Colors.white),
-              onPressed: () {
-                // Handle settings tap
-              },
-            ),
+            // IconButton(
+            //   icon: Icon(Icons.settings, color: Colors.white),
+            //   onPressed: () {
+            //     // Handle settings tap
+            //   },
+            // ),
           ],
         ),
       ),

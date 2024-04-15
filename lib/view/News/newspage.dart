@@ -56,15 +56,31 @@ class _NewsFeedPageState extends State<NewsFeedPage>
         backgroundColor: const Color.fromARGB(
             255, 24, 24, 24), // Scaffold background color is black
         appBar: AppBar(
-          automaticallyImplyLeading: false,
-          centerTitle: true,
-          title: const Text(
-            'Crypto News Feed 2024',
-            style: TextStyle(
-                color: Colors.white), // App bar title text color is white
+        automaticallyImplyLeading: false,
+        centerTitle:
+            false, // Change this to false to align the title to the start
+        title: Center(
+          child: Row(
+            mainAxisSize:
+                MainAxisSize.min, // Constrain the Row's size to its children
+            mainAxisAlignment:
+                MainAxisAlignment.center, // Center the children in the Row
+
+            children: [
+              Image.asset(
+                "assets/icon/960x960.png", // Path to your logo asset
+                height: 20, // Set a suitable height for the logo
+              ),
+              SizedBox(width: 10),
+              const Text(
+                'Crypto News Feed 2024',
+                style: TextStyle(color: Color.fromARGB(255, 255, 255, 255)),
+              ),
+            ],
           ),
-          backgroundColor: Colors.grey[900], // App bar background color
         ),
+        backgroundColor: const Color.fromARGB(255, 24, 24, 24),
+      ),
         body: _isConnected == null
             ? const Text('Checking connection...',
                 style: TextStyle(
