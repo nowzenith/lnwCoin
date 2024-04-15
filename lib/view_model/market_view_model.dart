@@ -154,9 +154,7 @@ class MarketViewModel extends ChangeNotifier with LaunchMixin {
         retryCount++;
         print('Attempt $retryCount failed: $e');
 
-        if (e is DioError &&
-            e.type == DioErrorType.other &&
-            retryCount < maxRetries) {
+        if (e is DioError && retryCount < maxRetries) {
           // If the error is a DioError of type other, retry after a delay
           await Future.delayed(Duration(seconds: 2));
           continue; // Proceed to the next iteration of the loop

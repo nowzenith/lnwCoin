@@ -18,16 +18,18 @@ class CommunityBlockPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.black, // Scaffold's background color is black
+      backgroundColor: const Color.fromARGB(
+          255, 24, 24, 24), // Scaffold's background color is black
       appBar: AppBar(
         automaticallyImplyLeading: false,
         centerTitle: true,
-        title: Text(
+        title: const Text(
           'Community',
           style: TextStyle(
               color: Colors.white), // AppBar title text color is white
         ),
-        backgroundColor: Colors.black, // AppBar background color is black
+        backgroundColor: const Color.fromARGB(
+            255, 24, 24, 24), // AppBar background color is black
       ),
       body: ListView.builder(
         itemCount: posts.length,
@@ -59,7 +61,7 @@ class PostItem extends StatelessWidget {
   Widget build(BuildContext context) {
     return Card(
       color: Colors.grey[900], // Card widget background color is a dark shade
-      margin: EdgeInsets.all(8),
+      margin: const EdgeInsets.all(8),
       child: Padding(
         padding: const EdgeInsets.all(12),
         child: Column(
@@ -70,7 +72,7 @@ class PostItem extends StatelessWidget {
                 CircleAvatar(
                   backgroundColor: Colors.deepOrange,
                   child: Text(username[0],
-                      style: TextStyle(
+                      style: const TextStyle(
                           color: Colors
                               .black)), // First letter of the username for the avatar
                 ),

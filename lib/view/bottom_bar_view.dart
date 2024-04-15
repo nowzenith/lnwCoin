@@ -11,6 +11,8 @@ import 'package:flutter/material.dart';
 
 import 'package:provider/provider.dart';
 
+import 'package:curved_navigation_bar/curved_navigation_bar.dart';
+
 class BottomBarView extends StatelessWidget {
   BottomBarView({super.key});
 
@@ -35,47 +37,21 @@ class BottomBarView extends StatelessWidget {
           builder: (context, bottomBarViewModel, child) {
             return Scaffold(
               body: pages[bottomBarViewModel.index],
-              bottomNavigationBar: BottomNavigationBar(
-                type: BottomNavigationBarType.fixed, // Add this line
-                backgroundColor: const Color.fromARGB(255, 21, 21, 21),
-                elevation: 0,
-                currentIndex: bottomBarViewModel.index,
-                // selectedIconTheme:
-                //     const IconThemeData(color: Colors.white, size: 26),
-                // unselectedIconTheme:
-                //     const IconThemeData(color: Colors.white, size: 26),
-                selectedFontSize: 11,
-                unselectedFontSize: 10,
-                selectedLabelStyle:
-                    const TextStyle(fontWeight: FontWeight.w600),
-                selectedItemColor: Colors.green,
-                unselectedLabelStyle:
-                    const TextStyle(fontWeight: FontWeight.w600),
-                unselectedItemColor: Colors.white,
+              bottomNavigationBar: CurvedNavigationBar(
+                backgroundColor: const Color.fromARGB(255, 24, 24, 24),
+                buttonBackgroundColor: Colors.green,
+                color: Colors.green,
+                animationDuration: const Duration(milliseconds: 300),
                 onTap: (value) {
                   bottomBarViewModel.changePage(value);
                 },
-                items: const [
-                  BottomNavigationBarItem(
-                    icon: Icon(Icons.show_chart),
-                    label: 'Markets',
-                  ),
-                  BottomNavigationBarItem(
-                    icon: Icon(Icons.newspaper),
-                    label: 'News',
-                  ),
-                  BottomNavigationBarItem(
-                    icon: Icon(Icons.search),
-                    label: 'Search',
-                  ),
-                  BottomNavigationBarItem(
-                    icon: Icon(Icons.account_balance_wallet),
-                    label: 'Portfolio',
-                  ),
-                  BottomNavigationBarItem(
-                    icon: Icon(Icons.people),
-                    label: 'Community',
-                  ),
+                items: const <Widget>[
+                  Icon(Icons.show_chart, size: 26, color: Colors.white),
+                  Icon(Icons.newspaper, size: 26, color: Colors.white),
+                  Icon(Icons.search, size: 26, color: Colors.white),
+                  Icon(Icons.account_balance_wallet,
+                      size: 26, color: Colors.white),
+                  Icon(Icons.people, size: 26, color: Colors.white),
                 ],
               ),
             );

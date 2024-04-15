@@ -16,7 +16,7 @@ class _SearchPageState extends State<SearchPage> {
     return Stack(children: [
       const BackgroundImage(),
       Scaffold(
-          backgroundColor: Colors.transparent,
+          backgroundColor: const Color.fromARGB(255, 24, 24, 24),
           body: SafeArea(
             child: Padding(
               padding: EdgeInsets.symmetric(horizontal: 20),
@@ -32,10 +32,10 @@ class _SearchPageState extends State<SearchPage> {
                     ),
                     child: TextField(
                       onChanged: (value) {
-                      setState(() {
-                        _searchQuery = value; // Update the search query
-                      });
-                    },
+                        setState(() {
+                          _searchQuery = value; // Update the search query
+                        });
+                      },
                       decoration: InputDecoration(
                         hintText: 'Search coins or exchanges...',
                         border: InputBorder.none,

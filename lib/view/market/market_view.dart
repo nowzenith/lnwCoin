@@ -89,7 +89,7 @@ class _MarketViewState extends State<MarketView> with TickerProviderStateMixin {
         const BackgroundImage(),
         Scaffold(
           appBar: const _AppBar(),
-          backgroundColor: Colors.transparent,
+          backgroundColor: Color.fromARGB(255, 24, 24, 24),
           body: Column(
             children: [
               const MarketStatsWidget(),
@@ -108,7 +108,8 @@ class _MarketViewState extends State<MarketView> with TickerProviderStateMixin {
                       ? Expanded(
                           child: TabBarView(
                               controller: _tabController, children: pages))
-                      : const Text("Can't access the internet, Please connect to the internet network.",
+                      : const Text(
+                          "Can't access the internet, Please connect to the internet network.",
                           style: TextStyle(
                             fontSize: 20,
                             color: Colors.white,

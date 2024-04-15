@@ -53,7 +53,8 @@ class _NewsFeedPageState extends State<NewsFeedPage>
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        backgroundColor: Colors.black, // Scaffold background color is black
+        backgroundColor: const Color.fromARGB(
+            255, 24, 24, 24), // Scaffold background color is black
         appBar: AppBar(
           automaticallyImplyLeading: false,
           centerTitle: true,
@@ -148,16 +149,16 @@ class MyNewsCard extends StatelessWidget {
   final DateTime date;
 
   Future<void> launchTheURL(String url1) async {
-  final Uri url = Uri.parse(url1);
-  try {
-    bool launched = await launchUrl(url);
-    if (!launched) {
-      print('Could not launch $url');
+    final Uri url = Uri.parse(url1);
+    try {
+      bool launched = await launchUrl(url);
+      if (!launched) {
+        print('Could not launch $url');
+      }
+    } catch (e) {
+      print('Exception launching $url: $e');
     }
-  } catch (e) {
-    print('Exception launching $url: $e');
   }
-}
 
   @override
   Widget build(BuildContext context) {
@@ -190,7 +191,8 @@ class MyNewsCard extends StatelessWidget {
         ),
         title: Text(
           title,
-          style: const TextStyle(color: Colors.white), // Title text color is white
+          style:
+              const TextStyle(color: Colors.white), // Title text color is white
         ),
         subtitle: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
