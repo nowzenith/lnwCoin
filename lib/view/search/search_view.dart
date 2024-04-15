@@ -10,6 +10,7 @@ class SearchPage extends StatefulWidget {
 }
 
 class _SearchPageState extends State<SearchPage> {
+  String _searchQuery = ''; // Step 2: Add this line
   @override
   Widget build(BuildContext context) {
     return Stack(children: [
@@ -30,6 +31,11 @@ class _SearchPageState extends State<SearchPage> {
                       borderRadius: BorderRadius.circular(30),
                     ),
                     child: TextField(
+                      onChanged: (value) {
+                      setState(() {
+                        _searchQuery = value; // Update the search query
+                      });
+                    },
                       decoration: InputDecoration(
                         hintText: 'Search coins or exchanges...',
                         border: InputBorder.none,
@@ -71,7 +77,7 @@ class _SearchPageState extends State<SearchPage> {
                       ],
                     ),
                   ),
-                  const OwnCoinPage()
+                  OwnCoinPage(searchQuery: _searchQuery)
                 ],
               ),
             ),
