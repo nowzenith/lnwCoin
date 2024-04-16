@@ -1,5 +1,6 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:lnwCoin/utils/dummy/dummy_news.dart';
+import 'package:lnwCoin/view/internet/no_internet.dart';
 import 'package:lnwCoin/view/market/components/Topbar.dart';
 import 'package:lnwCoin/view/market/components/market_stat.dart';
 import 'package:lnwCoin/view/market/top_bar_list/categories/categories.dart';
@@ -110,12 +111,7 @@ class _MarketViewState extends State<MarketView> with TickerProviderStateMixin {
                       ? Expanded(
                           child: TabBarView(
                               controller: _tabController, children: pages))
-                      : const Text(
-                          "Can't access the internet, Please connect to the internet network.",
-                          style: TextStyle(
-                            fontSize: 20,
-                            color: Colors.white,
-                          ))
+                      : const No_Internet_Page()
             ],
           ),
         ),
