@@ -39,7 +39,9 @@ class _MarketDataCard extends StatelessWidget {
                                   height: 30,
                                   width: 30,
                                   child: Image.network(coins[index].image)),
-                              SizedBox(width: 10,),
+                              SizedBox(
+                                width: 10,
+                              ),
                               Text(
                                 coins[index].symbol,
                                 style: const TextStyle(
@@ -51,27 +53,34 @@ class _MarketDataCard extends StatelessWidget {
                           ),
                         )),
                     Expanded(
-                        flex: 3,
-                        child: Center(
-                          child: Container(
-                            height: 50,
-                            child: Sparkline(
-                              data: coins[index].sparklineIn7d,
-                              useCubicSmoothing: true,
-                              cubicSmoothingFactor: 0.2,
-                              lineGradient: const LinearGradient(
-                                  begin: Alignment.topCenter,
-                                  end: Alignment.bottomCenter,
-                                  colors: [Colors.greenAccent, Colors.green]),
-                            ),
+                      flex: 3,
+                      child: Center(
+                        child: Container(
+                          height: 50,
+                          child: Sparkline(
+                            data: coins[index].sparklineIn7d,
+                            useCubicSmoothing: true,
+                            cubicSmoothingFactor: 0.2,
+                            lineGradient: isMinus
+                                ? const LinearGradient(
+                                    begin: Alignment.topCenter,
+                                    end: Alignment.bottomCenter,
+                                    colors: [Colors.redAccent, Colors.red])
+                                : const LinearGradient(
+                                    begin: Alignment.topCenter,
+                                    end: Alignment.bottomCenter,
+                                    colors: [Colors.greenAccent, Colors.green]),
                           ),
-                        )),
+                        ),
+                      ),
+                    ),
                     Expanded(
                       flex: 3,
                       child: Center(
                         child: Text(
                           "\$${coins[index].currentPrice.toString().replaceAll(RegExp(r"([.]*0+)(?!.*\d)"), "")}",
-                          style: const TextStyle(fontSize: 16, color: Colors.white),
+                          style: const TextStyle(
+                              fontSize: 16, color: Colors.white),
                         ),
                       ),
                     ),
