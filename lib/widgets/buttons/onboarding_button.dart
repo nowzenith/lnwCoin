@@ -19,8 +19,9 @@ class OnBoardingButton extends StatelessWidget {
           height: 50,
           width: 260,
           decoration: BoxDecoration(
-              color: Colors.greenAccent,
-              border: Border.all(color: Colors.green, width: 1.4),
+              color: const Color.fromARGB(255, 170, 0, 28),
+              border: Border.all(
+                  color: const Color.fromARGB(255, 170, 0, 28), width: 1.4),
               borderRadius: BorderRadius.circular(10)),
           child: label == "Next"
               ? Padding(
@@ -30,11 +31,14 @@ class OnBoardingButton extends StatelessWidget {
                     children: [
                       Text(
                         label,
-                        style: const TextStyle(fontSize: 20),
+                        style: const TextStyle(
+                            color: Color.fromARGB(255, 255, 255, 255),
+                            fontSize: 20),
                       ),
                       const Icon(
                         Icons.arrow_forward_ios,
                         size: 18,
+                        color: Color.fromARGB(255, 255, 255, 255),
                       ),
                     ],
                   ),
@@ -42,7 +46,9 @@ class OnBoardingButton extends StatelessWidget {
               : const Center(
                   child: Text(
                     "Start lnwCoin",
-                    style: TextStyle(fontSize: 20),
+                    style: TextStyle(
+                        color: Color.fromARGB(255, 255, 255, 255),
+                        fontSize: 20),
                   ),
                 ),
         ),

@@ -9,7 +9,6 @@ import 'package:intl/intl.dart';
 import 'package:lottie/lottie.dart';
 import 'package:provider/provider.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
-
 import '../../model/market_model.dart';
 import '../../model/wallet.dart';
 import '../../utils/constants.dart';
@@ -41,11 +40,11 @@ class TradeView extends StatefulWidget {
 
 class _TradeViewState extends State<TradeView> with TickerProviderStateMixin {
   late AnimationController _animationController;
-  
+
   @override
   void initState() {
     print("trade_view");
-    print(widget.symbol.toUpperCase()+"USDT");
+    print(widget.symbol.toUpperCase() + "USDT");
     _animationController = AnimationController(
         vsync: this, duration: const Duration(milliseconds: 3000));
 
@@ -76,8 +75,8 @@ class _TradeViewState extends State<TradeView> with TickerProviderStateMixin {
                   stream: widget.marketViewModel.getMarketData(),
                   builder: (context, AsyncSnapshot marketSnapshot) {
                     return StreamBuilder(
-                        stream:
-                            widget.tradeViewModel.getCandleData(widget.symbol.toUpperCase()+"USDT"),
+                        stream: widget.tradeViewModel.getCandleData(
+                            widget.symbol.toUpperCase() + "USDT"),
                         builder: (context, AsyncSnapshot tradeSnapshot) {
                           if (marketSnapshot.hasData && tradeSnapshot.hasData) {
                             List<Market> market = marketSnapshot.data;
@@ -85,8 +84,11 @@ class _TradeViewState extends State<TradeView> with TickerProviderStateMixin {
                             List<Candle> candle = tradeSnapshot.data;
                             return Column(
                               children: [
-                                _AppBar(symbol: widget.symbol),
-                                Image.asset("assets/icon/960x960.png",height: 100,),
+                                AppBarWithStar(symbol: widget.symbol),
+                                Image.asset(
+                                  "assets/icon/960x960.png",
+                                  height: 100,
+                                ),
                                 _PriceLabel(
                                     market: market, index: widget.index),
                                 _IntervalButtons(

@@ -29,7 +29,8 @@ class HalvingCountdown extends StatelessWidget {
     return Container(
       padding: EdgeInsets.symmetric(horizontal: 12, vertical: 6),
       decoration: BoxDecoration(
-        color: const Color.fromARGB(255, 170, 0, 28), // Dark blue color, replace with actual color code
+        color: const Color.fromARGB(
+            255, 170, 0, 28), // Dark blue color, replace with actual color code
         borderRadius: BorderRadius.circular(20),
       ),
       child: Center(

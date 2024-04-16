@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:lnwCoin/view/mywallet/wallet_view.dart';
 
 class WatchlistPage extends StatelessWidget {
   @override
@@ -7,39 +8,42 @@ class WatchlistPage extends StatelessWidget {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
-          Icon(
+          const Icon(
             Icons.star,
             size: 100.0,
             color: Colors.amber,
           ),
           // You would usually load an actual image instead of an Icon
-          Text(
+          const Text(
             'Your watchlist is empty',
             style: TextStyle(
                 fontSize: 20.0,
                 fontWeight: FontWeight.bold,
                 color: Colors.white),
           ),
-          Text(
+          const Text(
             'Start building your watchlist by clicking button below',
             textAlign: TextAlign.center,
             style: TextStyle(
               color: Colors.white,
             ),
           ),
-          SizedBox(height: 20.0), // Spacing
+          const SizedBox(height: 20.0), // Spacing
           ElevatedButton(
             onPressed: () {
               // Implement your add coins action
             },
-            child: Text('Add Coins'),
+            child: const Text('Add Coins'),
           ),
           TextButton(
             onPressed: () {
-              // Implement your log in action
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => MyWalletView()),
+              );
             },
-            child: Text('Log in'),
-          ),
+            child: const Text('Log in'),
+          )
         ],
       ),
     );
