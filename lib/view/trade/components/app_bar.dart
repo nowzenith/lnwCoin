@@ -1,8 +1,16 @@
 part of 'package:lnwCoin/view/trade/trade_view.dart';
 
-class _AppBar extends StatelessWidget {
-  const _AppBar({required this.symbol});
+class AppBarWithStar extends StatefulWidget {
   final String symbol;
+  const AppBarWithStar({super.key, required this.symbol});
+
+  @override
+  // ignore: library_private_types_in_public_api
+  _AppBarWithStarState createState() => _AppBarWithStarState();
+}
+
+class _AppBarWithStarState extends State<AppBarWithStar> {
+  bool _isStarred = false;
 
   @override
   Widget build(BuildContext context) {
@@ -12,19 +20,27 @@ class _AppBar extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           InkWell(
-              onTap: () => Navigator.pop(context),
-              child: const Icon(
-                Icons.arrow_back,
-                color: Colors.white,
-              )),
+            onTap: () => Navigator.pop(context),
+            child: const Icon(
+              Icons.arrow_back,
+              color: Colors.white,
+            ),
+          ),
           Text(
-            symbol,
+            widget.symbol,
             style: const TextStyle(
                 color: Colors.white, fontSize: 20, fontWeight: FontWeight.bold),
           ),
-          const Icon(
-            Iconsax.setting_2,
-            color: Colors.white,
+          InkWell(
+            onTap: () {
+              setState(() {
+                _isStarred = !_isStarred;
+              });
+            },
+            child: Icon(
+              _isStarred ? Iconsax.star1 : Iconsax.star,
+              color: _isStarred ? Colors.orange : Colors.white,
+            ),
           ),
         ],
       ),
