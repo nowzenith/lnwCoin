@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'dart:convert';
 import 'package:lnwCoin/model/market_model.dart';
 import 'package:lnwCoin/utils/extensions/lottie_extension.dart';
+import 'package:lnwCoin/view/market/top_bar_list/categories/coin.dart';
 import 'package:lnwCoin/view_model/market_view_model.dart';
 import 'package:lottie/lottie.dart';
 import 'package:provider/provider.dart';
@@ -115,53 +116,63 @@ class CryptoCategoryCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Card(
-      color: Colors.grey[850], // Dark card background
-      margin: const EdgeInsets.all(8),
-      child: Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: <Widget>[
-            Text(
-              name,
-              style: TextStyle(
-                color: Colors.white,
-                fontSize: 20,
-                fontWeight: FontWeight.bold,
+    return InkWell(
+      onTap: (){
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => Cate_coin_page(name: name),
+          ),
+        );
+      },
+      child: Card(
+        color: Colors.grey[850], // Dark card background
+        margin: const EdgeInsets.all(8),
+        child: Padding(
+          padding: const EdgeInsets.all(16.0),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: <Widget>[
+              Text(
+                name,
+                style: TextStyle(
+                  color: Colors.white,
+                  fontSize: 20,
+                  fontWeight: FontWeight.bold,
+                ),
               ),
-            ),
-            SizedBox(height: 8),
-            Text(
-              'Market Cap: \$${getFormattedMarketCap(marketCap)}',
-              style: TextStyle(
-                color: Colors.white70,
-                fontSize: 16,
+              SizedBox(height: 8),
+              Text(
+                'Market Cap: \$${getFormattedMarketCap(marketCap)}',
+                style: TextStyle(
+                  color: Colors.white70,
+                  fontSize: 16,
+                ),
               ),
-            ),
-            SizedBox(height: 8),
-            Text(
-              '24h Change: ${marketCapChange.toStringAsFixed(2)}%',
-              style: TextStyle(
-                color: marketCapChange >= 0 ? Colors.green : Colors.red,
-                fontSize: 16,
+              SizedBox(height: 8),
+              Text(
+                '24h Change: ${marketCapChange.toStringAsFixed(2)}%',
+                style: TextStyle(
+                  color: marketCapChange >= 0 ? Colors.green : Colors.red,
+                  fontSize: 16,
+                ),
               ),
-            ),
-            SizedBox(height: 16),
-            Row(
-              children: top3CoinsUrls.map((url) {
-                return Padding(
-                  padding: const EdgeInsets.only(right: 8.0),
-                  child: Image.network(
-                    url,
-                    width: 40,
-                    height: 40,
-                    fit: BoxFit.cover,
-                  ),
-                );
-              }).toList(),
-            ),
-          ],
+              SizedBox(height: 16),
+              Row(
+                children: top3CoinsUrls.map((url) {
+                  return Padding(
+                    padding: const EdgeInsets.only(right: 8.0),
+                    child: Image.network(
+                      url,
+                      width: 40,
+                      height: 40,
+                      fit: BoxFit.cover,
+                    ),
+                  );
+                }).toList(),
+              ),
+            ],
+          ),
         ),
       ),
     );

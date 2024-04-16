@@ -24,5 +24,19 @@ class CoinGeckoApi {
     }
   }
 
+  // Get markets
+  Future<List<CryptoCurrency>> fetchCategory(String category) async {
+    var url = Uri.parse('$baseUrl/coins/categories?vs_currency=usd&sparkline=true&precision=2&category=$category');
+    var response = await http.get(url, headers: headers);
+
+    if (response.statusCode == 200) {
+      List<dynamic> currenciesJson = json.decode(response.body);
+      List<CryptoCurrency> currencies = currenciesJson.map((json) => CryptoCurrency.fromJson(json)).toList();
+      return currencies;
+    } else {
+      throw Exception('Failed to load data');
+    }
+  }
+
   // Add more methods for other endpoints
 }
