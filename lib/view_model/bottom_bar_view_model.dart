@@ -6,8 +6,15 @@ class BottomBarViewModel extends ChangeNotifier {
 
   int get index => _index;
 
-  void changePage(int value) {
-    _index = value;
-    notifyListeners();
+  set index(int newIndex) {
+    if (_index != newIndex) {
+      _index = newIndex;
+      notifyListeners();  // Notify all listening widgets of the change
+    }
   }
+
+  void changePage(int newIndex) {
+    index = newIndex;  // Set new index which also notifies listeners
+  }
+
 }
