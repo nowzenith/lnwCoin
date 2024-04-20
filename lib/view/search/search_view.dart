@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:lnwCoin/model/search_model.dart';
+import 'package:lnwCoin/service/coingecko/coingecko_api.dart';
 import 'package:lnwCoin/utils/constants.dart';
-import 'package:lnwCoin/view/search/components/owncoin.dart';
 
 class SearchPage extends StatefulWidget {
   const SearchPage({super.key});
@@ -10,7 +11,43 @@ class SearchPage extends StatefulWidget {
 }
 
 class _SearchPageState extends State<SearchPage> {
-  String _searchQuery = ''; // Step 2: Add this line
+  TextEditingController _searchController = TextEditingController();
+  List<Search> _searchResults = [];
+
+  @override
+  void initState() {
+    print("search");
+    _searchController.addListener(_onSearchChanged);
+    super.initState();
+  }
+
+  Future<void> _fetchData(String query) async {
+    try {
+      var results = await CoinGeckoApi().searchCurrencies(query);
+      setState(() {
+        _searchResults = results;
+        print(results);
+      });
+    } catch (e) {
+      // Consider adding error handling logic here
+      print('Error fetching data: $e');
+    }
+  }
+
+  void _onSearchChanged() async {
+    if (_searchController.text.isEmpty) {
+      setState(() => _searchResults = []);
+    } else {
+      _fetchData(_searchController.text);
+    }
+  }
+
+  @override
+  void dispose() {
+    _searchController.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Stack(children: [
@@ -31,11 +68,7 @@ class _SearchPageState extends State<SearchPage> {
                       borderRadius: BorderRadius.circular(30),
                     ),
                     child: TextField(
-                      onChanged: (value) {
-                        setState(() {
-                          _searchQuery = value; // Update the search query
-                        });
-                      },
+                      controller: _searchController,
                       decoration: InputDecoration(
                         hintText: 'Search coins or exchanges...',
                         border: InputBorder.none,
@@ -77,7 +110,20 @@ class _SearchPageState extends State<SearchPage> {
                       ],
                     ),
                   ),
-                  OwnCoinPage(searchQuery: _searchQuery)
+                  Expanded(
+                    child: ListView.builder(
+                      itemCount: _searchResults.length,
+                      itemBuilder: (context, index) {
+                        return ListTile(
+                          title: Text(_searchResults[index].name, style: TextStyle(color: Colors.white)),
+                          subtitle: Text(
+                              _searchResults[index].symbol, style: TextStyle(color: Colors.white60),),
+                          leading: Image.network(_searchResults[index].thumb),
+                          trailing: Text('#${_searchResults[index].marketCapRank}', style: TextStyle(color: Colors.white60),),
+                        );
+                      },
+                    ),
+                  )
                 ],
               ),
             ),

@@ -22,7 +22,6 @@ class BottomBarView extends StatelessWidget {
     const SearchPage(),
     const MyWalletView(),
     CommunityBlockPage(),
-    // const WalletView(),
   ];
 
   @override
@@ -36,21 +35,21 @@ class BottomBarView extends StatelessWidget {
         return Consumer<BottomBarViewModel>(
           builder: (context, bottomBarViewModel, child) {
             return Scaffold(
-              body: pages[bottomBarViewModel.index],
+              body: pages[bottomBarViewModel.index],  // Using the index from ViewModel
               bottomNavigationBar: CurvedNavigationBar(
+                index: bottomBarViewModel.index,
                 backgroundColor: const Color.fromARGB(255, 24, 24, 24),
                 buttonBackgroundColor: const Color.fromARGB(255, 170, 0, 28),
                 color: const Color.fromARGB(255, 170, 0, 28),
                 animationDuration: const Duration(milliseconds: 300),
                 onTap: (value) {
-                  bottomBarViewModel.changePage(value);
+                  bottomBarViewModel.changePage(value);  // Changing the page index
                 },
                 items: const <Widget>[
                   Icon(Icons.show_chart, size: 26, color: Colors.white),
                   Icon(Icons.newspaper, size: 26, color: Colors.white),
                   Icon(Icons.search, size: 26, color: Colors.white),
-                  Icon(Icons.account_balance_wallet,
-                      size: 26, color: Colors.white),
+                  Icon(Icons.account_balance_wallet, size: 26, color: Colors.white),
                   Icon(Icons.people, size: 26, color: Colors.white),
                 ],
               ),
