@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:lnwCoin/view/market/top_bar_list/categories/meme.dart';
 
 class Cate_coin_page extends StatefulWidget {
   final String name;
@@ -11,6 +12,6 @@ class Cate_coin_page extends StatefulWidget {
 class _Cate_coin_pageState extends State<Cate_coin_page> {
   @override
   Widget build(BuildContext context) {
-    return const Placeholder();
+    return CryptoTrackerPage();
   }
 }

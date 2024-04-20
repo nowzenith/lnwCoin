@@ -11,11 +11,20 @@ class Metaverse_page extends StatelessWidget {
         const BackgroundImage(),
         Scaffold(
           backgroundColor: const Color.fromARGB(255, 24, 24, 24),
-          body: Column(children: [
-            Image.asset("assets/images/metaverse.png"),
-            const SizedBox(height: 20,),
-            FilledButton(onPressed: (){}, child: const Text('Soon'),style: FilledButton.styleFrom(backgroundColor: Color.fromARGB(255, 170, 0, 28)),),
-          ],),
+          body: Column(
+            children: [
+              Image.asset("assets/images/metaverse.png"),
+              const SizedBox(
+                height: 20,
+              ),
+              FilledButton(
+                onPressed: () {},
+                child: const Text('Soon'),
+                style: FilledButton.styleFrom(
+                    backgroundColor: Color.fromARGB(255, 170, 0, 28)),
+              ),
+            ],
+          ),
         ),
       ],
     );
