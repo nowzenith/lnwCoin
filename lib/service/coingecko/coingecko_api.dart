@@ -28,10 +28,13 @@ class CoinGeckoApi {
   }
 
   // Get markets
-  Future<List<CryptoCurrency>> fetchCategory(String category) async {
+  Future<List<CryptoCurrency>> fetchCategoryCoin(String category) async {
+    print(category);
+    var encodedCategory = Uri.encodeComponent(category);
     var url = Uri.parse(
-        '$baseUrl/coins/categories?vs_currency=usd&sparkline=true&precision=2&category=$category');
+        '$baseUrl/coins/markets?vs_currency=usd&category=$encodedCategory&sparkline=true&precision=2');
     var response = await http.get(url, headers: headers);
+    print(response.statusCode);
 
     if (response.statusCode == 200) {
       List<dynamic> currenciesJson = json.decode(response.body);
@@ -54,6 +57,17 @@ class CoinGeckoApi {
         return parsed;
     } else {
       throw Exception('Failed to load data');
+    }
+  }
+
+  Future<List<dynamic>> fetchCategories() async {
+      String apiEndpoint = "https://api.coingecko.com/api/v3/coins/categories";
+    var url = Uri.parse(apiEndpoint);
+    var response = await http.get(url);
+    if (response.statusCode == 200) {
+      return json.decode(response.body);
+    } else {
+      return [{}];
     }
   }
 
