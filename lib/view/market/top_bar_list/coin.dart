@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:intl/intl.dart';
 import 'package:lnwCoin/model/crypto_model.dart';
 import 'package:lnwCoin/service/coingecko/coingecko_api.dart';
 import 'package:lnwCoin/utils/extensions/lottie_extension.dart';

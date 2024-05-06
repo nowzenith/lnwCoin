@@ -96,21 +96,30 @@ class _MarketDataCard extends StatelessWidget {
                             borderRadius: BorderRadius.circular(12),
                           ),
                           child: Center(
-                              child: isMinus
-                                  ? Text(
-                                      coins[index]
-                                          .priceChangePercentage24h
-                                          .toString(),
-                                      style: const TextStyle(
-                                          color: Colors.white,
-                                          fontWeight: FontWeight.bold),
-                                    )
-                                  : Text(
-                                      '+${coins[index].priceChangePercentage24h}',
-                                      style: const TextStyle(
-                                          color: Colors.white,
-                                          fontWeight: FontWeight.bold),
-                                    )),
+                            child: isMinus
+                                ? Text(
+                                    coins[index].priceChangePercentage24h !=
+                                            null
+                                        ? coins[index]
+                                            .priceChangePercentage24h!
+                                            .toStringAsFixed(2)
+                                        : '', // Format to two decimal places if not null, else provide an empty string
+                                    style: const TextStyle(
+                                      color: Colors.white,
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                  )
+                                : Text(
+                                    coins[index].priceChangePercentage24h !=
+                                            null
+                                        ? '+${coins[index].priceChangePercentage24h!.toStringAsFixed(2)}'
+                                        : '', // Format to two decimal places if not null, else provide an empty string
+                                    style: const TextStyle(
+                                      color: Colors.white,
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                  ),
+                          ),
                         )),
                   ],
                 ),

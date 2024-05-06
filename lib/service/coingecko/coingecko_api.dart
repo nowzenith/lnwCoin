@@ -61,13 +61,24 @@ class CoinGeckoApi {
   }
 
   Future<List<dynamic>> fetchCategories() async {
-      String apiEndpoint = "https://api.coingecko.com/api/v3/coins/categories";
+      String apiEndpoint = "$baseUrl/coins/categories";
     var url = Uri.parse(apiEndpoint);
-    var response = await http.get(url);
+    var response = await http.get(url,headers: headers);
     if (response.statusCode == 200) {
       return json.decode(response.body);
     } else {
       return [{}];
+    }
+  }
+
+  Future<List<dynamic>> fetchNft() async {
+      String apiEndpoint = "$baseUrl/nfts/markets";
+    var url = Uri.parse(apiEndpoint);
+    var response = await http.get(url,headers: headers);
+    if (response.statusCode == 200) {
+      return json.decode(response.body);
+    } else {
+      return [{"e":response.statusCode}];
     }
   }
 
