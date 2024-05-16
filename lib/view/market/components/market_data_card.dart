@@ -43,7 +43,7 @@ class _MarketDataCard extends StatelessWidget {
                                 width: 10,
                               ),
                               Text(
-                                coins[index].symbol,
+                                coins[index].symbol.toUpperCase(),
                                 style: const TextStyle(
                                     fontWeight: FontWeight.w600,
                                     color: Colors.white,
@@ -78,7 +78,9 @@ class _MarketDataCard extends StatelessWidget {
                       flex: 3,
                       child: Center(
                         child: Text(
-                          "\$${coins[index].currentPrice.toString().replaceAll(RegExp(r"([.]*0+)(?!.*\d)"), "")}",
+                          coins[index].currentPrice != null
+                              ? "\$${NumberFormat('#,##0.##', 'en_US').format(coins[index].currentPrice)}"
+                              : "\$-", // Handles null case by displaying a placeholder
                           style: const TextStyle(
                               fontSize: 16, color: Colors.white),
                         ),

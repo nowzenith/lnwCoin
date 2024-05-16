@@ -8,21 +8,20 @@ import 'package:lnwCoin/utils/extensions/lottie_extension.dart';
 import 'package:lnwCoin/view_model/market_view_model.dart';
 import 'package:lottie/lottie.dart';
 import 'package:provider/provider.dart';
-part 'market_data_card.dart';
 
-class NftPage extends StatefulWidget {
-  const NftPage({super.key});
+class DerivativesPage extends StatefulWidget {
+  const DerivativesPage({super.key});
 
   @override
-  State<NftPage> createState() => _NftPageState();
+  State<DerivativesPage> createState() => _DerivativesPageState();
 }
 
-class _NftPageState extends State<NftPage> with TickerProviderStateMixin {
+class _DerivativesPageState extends State<DerivativesPage> with TickerProviderStateMixin {
   late Future<List<dynamic>> _nftFuture;
   late AnimationController _animationController;
   @override
   void initState() {
-    print("nft_view");
+    print("Derivatives_view");
     _animationController = AnimationController(
         vsync: this, duration: const Duration(milliseconds: 3000));
     _nftFuture = CoinGeckoApi()
@@ -89,6 +88,7 @@ class NftCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final bool isMinus = data.marketCapUsd24hPercentageChange < 0;
+    final double fontSize1 = data.marketCapUsd24hPercentageChange != null && data.marketCapUsd24hPercentageChange! > 1000 ? 12 : 16;
     return Padding(
         padding: const EdgeInsets.symmetric(horizontal: 5),
         child: InkWell(

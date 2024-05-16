@@ -4,7 +4,7 @@ import 'package:lnwCoin/view/internet/no_internet.dart';
 import 'package:lnwCoin/view/market/components/Topbar.dart';
 import 'package:lnwCoin/view/market/components/market_stat.dart';
 import 'package:lnwCoin/view/market/top_bar_list/categories/categories.dart';
-import 'package:lnwCoin/view/market/top_bar_list/chains/chains.dart';
+import 'package:lnwCoin/view/market/top_bar_list/Derivatives/Derivatives.dart';
 import 'package:lnwCoin/view/market/top_bar_list/coin.dart';
 import 'package:lnwCoin/view/market/top_bar_list/exchange/exchange.dart';
 import 'package:lnwCoin/view/market/top_bar_list/metaverse.dart';
@@ -63,7 +63,7 @@ class _MarketViewState extends State<MarketView> with TickerProviderStateMixin {
     OverviewPage(),
     const NftPage(),
     const ExchangePage(),
-    const ChainsPage(),
+    const DerivativesPage(),
     const CategoriesPage(),
     const Metaverse_page(),
   ];

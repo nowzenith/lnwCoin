@@ -82,5 +82,16 @@ class CoinGeckoApi {
     }
   }
 
+  Future<List<dynamic>> fetchExchange() async {
+      String apiEndpoint = "$baseUrl/exchanges";
+    var url = Uri.parse(apiEndpoint);
+    var response = await http.get(url,headers: headers);
+    if (response.statusCode == 200) {
+      return json.decode(response.body);
+    } else {
+      return [{"e":response.statusCode}];
+    }
+  }
+
   // Add more methods for other endpoints
 }
