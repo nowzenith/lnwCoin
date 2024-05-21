@@ -61,6 +61,7 @@ dependencies:
   
   curved_navigation_bar: ^1.0.3
   chart_sparkline: ^1.0.15+1
+  webview_flutter: ^4.7.0
 
 dev_dependencies:
   flutter_test:

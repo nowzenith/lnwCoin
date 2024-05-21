@@ -6,8 +6,6 @@ import 'package:lnwCoin/service/binance/dio_service.dart';
 import 'package:lnwCoin/utils/packages/url_launcher.dart';
 import 'package:flutter/material.dart';
 
-import '../view/trade/i_trade_view.dart';
-
 class MarketViewModel extends ChangeNotifier with LaunchMixin {
   MarketViewModel() {
     _dioService = DioService();
@@ -176,13 +174,6 @@ class MarketViewModel extends ChangeNotifier with LaunchMixin {
 
   void goToWebsite({required String url}) {
     launchTheURL(url);
-  }
-
-  void navigateToTradeView(BuildContext context, int index, String symbol) {
-    Navigator.push(
-        context,
-        MaterialPageRoute(
-            builder: (context) => ITradeView(index: index, symbol: symbol)));
   }
 
   void changeVisibility() {

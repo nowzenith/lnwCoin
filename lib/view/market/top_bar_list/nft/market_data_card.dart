@@ -19,8 +19,6 @@ class _MarketDataCard extends StatelessWidget {
       child: InkWell(
         onTap: () {
           function();
-          marketViewModel.navigateToTradeView(
-              context, index, coins[index].symbol);
         },
         child: Card(
           color: Colors.white.withOpacity(0.5),
