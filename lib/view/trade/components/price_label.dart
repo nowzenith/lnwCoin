@@ -2,12 +2,12 @@
 part of 'package:lnwCoin/view/trade/trade_view.dart';
 
 class _PriceLabel extends StatelessWidget {
-  const _PriceLabel({required this.market, required this.index});
-  final List<Market> market;
-  final int index;
+  const _PriceLabel({required this.price, required this.price_change_percentage_24h});
+  final double price;
+  final double price_change_percentage_24h;
   @override
   Widget build(BuildContext context) {
-    final bool isMinus = market[index].priceChangePercent.startsWith('-');
+    final bool isMinus = price_change_percentage_24h.toString().startsWith('-');
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 10),
       child: Column(
@@ -20,7 +20,7 @@ class _PriceLabel extends StatelessWidget {
           Row(
             children: [
               Text(
-                "\$${market[index].lastPrice.toString().replaceAll(RegExp(r"([.]*0+)(?!.*\d)"), "")}",
+                "\$${price.toString().replaceAll(RegExp(r"([.]*0+)(?!.*\d)"), "")}",
                 style: const TextStyle(fontSize: 25, color: Colors.white),
               ),
               const SizedBox(width: 10),
@@ -35,8 +35,8 @@ class _PriceLabel extends StatelessWidget {
                 ),
                 child: Center(
                     child: isMinus
-                        ? Text(market[index].priceChangePercent)
-                        : Text('+${market[index].priceChangePercent}')),
+                        ? Text(price_change_percentage_24h.toString())
+                        : Text('+${price_change_percentage_24h}')),
               )
             ],
           ),

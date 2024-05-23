@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:lnwCoin/model/derivatives_model.dart';
 
 import 'package:lnwCoin/model/market_model.dart';
 import 'package:lnwCoin/model/nft_model.dart';
@@ -17,15 +18,15 @@ class DerivativesPage extends StatefulWidget {
 }
 
 class _DerivativesPageState extends State<DerivativesPage> with TickerProviderStateMixin {
-  late Future<List<dynamic>> _nftFuture;
+  late Future<List<dynamic>> _deFuture;
   late AnimationController _animationController;
   @override
   void initState() {
     print("Derivatives_view");
     _animationController = AnimationController(
         vsync: this, duration: const Duration(milliseconds: 3000));
-    _nftFuture = CoinGeckoApi()
-        .fetchNft(); // Ensure the future is initialized here
+    _deFuture = CoinGeckoApi()
+        .fetchde(); // Ensure the future is initialized here
     super.initState();
   }
 
@@ -38,7 +39,7 @@ class _DerivativesPageState extends State<DerivativesPage> with TickerProviderSt
   @override
   Widget build(BuildContext context) {
     return FutureBuilder<List<dynamic>>(
-      future: _nftFuture,
+      future: _deFuture,
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
           return Center(
@@ -60,7 +61,7 @@ class _DerivativesPageState extends State<DerivativesPage> with TickerProviderSt
             itemBuilder: (context, index) {
               print(snapshot.data![index]);
               var dataJson = Map<String, dynamic>.from(snapshot.data![index]);
-              var data = NFT
+              var data = DerivativesModel
                   .fromJson(dataJson); // Correctly converts to CryptoCategory
               return NftCard(
                 data: data,
@@ -78,7 +79,7 @@ class _DerivativesPageState extends State<DerivativesPage> with TickerProviderSt
 }
 
 class NftCard extends StatelessWidget {
-  final NFT data;
+  final DerivativesModel data;
 
   const NftCard({
     Key? key,
@@ -87,8 +88,6 @@ class NftCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final bool isMinus = data.marketCapUsd24hPercentageChange < 0;
-    final double fontSize1 = data.marketCapUsd24hPercentageChange != null && data.marketCapUsd24hPercentageChange! > 1000 ? 12 : 16;
     return Padding(
         padding: const EdgeInsets.symmetric(horizontal: 5),
         child: InkWell(
@@ -124,39 +123,28 @@ class NftCard extends StatelessWidget {
                       flex: 3,
                       child: Center(
                         child: Text(
-                          "\$${NumberFormat('#,##0.##', 'en_US').format(data.floorPriceUsd)}",
+                          "\$${NumberFormat('#,##0.##', 'en_US').format(data.openInterestBtc)}",
                           style: const TextStyle(
                               fontSize: 16, color: Colors.white),
                         ),
                       ),
                     ),
                     Expanded(
-                        flex: 2,
+                        flex: 3,
                         child: Container(
                           height: 30,
                           width: 60,
                           decoration: BoxDecoration(
-                            color: isMinus
-                                ? const Color.fromARGB(255, 232, 22, 64)
-                                : const Color.fromARGB(255, 4, 209, 109),
                             borderRadius: BorderRadius.circular(12),
                           ),
                           child: Center(
-                            child: isMinus
-                                ? Text(
-                                    NumberFormat('#,##0.##', 'en_US').format(data.marketCapUsd24hPercentageChange),
+                            child: 
+                                Text(
+                                    '\$${NumberFormat('#,##0.##', 'en_US').format(data.tradeVolume24hBtc)}',
                                     style: TextStyle(
                                       color: Colors.white,
                                       fontWeight: FontWeight.bold,
-                                      fontSize: data.marketCapUsd24hPercentageChange > 1000 ? 10 : 14
-                                    ),
-                                  )
-                                : Text(
-                                    '+${NumberFormat('#,##0.##', 'en_US').format(data.marketCapUsd24hPercentageChange)}%',
-                                    style: TextStyle(
-                                      color: Colors.white,
-                                      fontWeight: FontWeight.bold,
-                                      fontSize: data.marketCapUsd24hPercentageChange > 1000 ? 10 : 14
+                                      fontSize: 14
                                     ),
                                   ),
                           ),

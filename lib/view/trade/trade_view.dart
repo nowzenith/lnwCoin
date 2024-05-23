@@ -85,7 +85,7 @@ class _TradeViewState extends State<TradeView> with TickerProviderStateMixin {
                           "assets/icon/960x960.png",
                           height: 100,
                         ),
-                        // _PriceLabel(market: market, index: widget.index),
+                        _PriceLabel(price: snapshot.data.usdPrice,price_change_percentage_24h: snapshot.data.price_change_percentage_24h,),
                         Chart2(name: snapshot.data.symbol),
                         // _InfoBody(candle: candle),
                         // _TradeButtons(

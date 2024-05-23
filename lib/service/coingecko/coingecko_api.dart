@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:http/http.dart' as http;
 import 'package:lnwCoin/model/crypto_model.dart';
+import 'package:lnwCoin/model/derivatives_model.dart';
 import 'package:lnwCoin/model/search_model.dart';
 import 'package:lnwCoin/model/tradeview_model.dart';
 
@@ -105,12 +106,24 @@ class CoinGeckoApi {
     if (response.statusCode == 200) {
       final jsonresponse = json.decode(response.body);
       print(jsonresponse['market_data']['low_24h']['usd'].toDouble());
-      TradeViewModel tv = TradeViewModel(id: jsonresponse["id"], name: jsonresponse["name"], symbol: jsonresponse["symbol"], usdPrice: jsonresponse['market_data']['current_price']['usd'].toDouble(), high24h: jsonresponse['market_data']['high_24h']['usd'].toDouble(), low24h: jsonresponse['market_data']['low_24h']['usd'].toDouble());
+      TradeViewModel tv = TradeViewModel(id: jsonresponse["id"], name: jsonresponse["name"], symbol: jsonresponse["symbol"], usdPrice: jsonresponse['market_data']['current_price']['usd'].toDouble(), high24h: jsonresponse['market_data']['high_24h']['usd'].toDouble(), low24h: jsonresponse['market_data']['low_24h']['usd'].toDouble(),price_change_percentage_24h: jsonresponse['market_data']['price_change_percentage_24h'].toDouble());
       return tv;
     } else {
       // Handle the error case by returning an empty list or throwing an exception
       throw Exception(
           'Failed to load exchanges with status code ${response.statusCode}');
+    }
+  }
+
+  Future<List<dynamic>> fetchde() async {
+    var url = Uri.parse('$baseUrl/derivatives/exchanges?per_page=100'); // Use the appropriate endpoint
+    var response = await http.get(url, headers: headers);
+
+    if (response.statusCode == 200) {
+      List<dynamic> marketDataJson = json.decode(response.body);
+      return marketDataJson;
+    } else {
+      throw Exception('Failed to load market data');
     }
   }
 

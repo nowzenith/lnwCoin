@@ -5,6 +5,7 @@ class TradeViewModel {
   final double usdPrice;
   final double high24h;
   final double low24h;
+  final double price_change_percentage_24h;
 
   TradeViewModel({
     required this.id,
@@ -13,6 +14,7 @@ class TradeViewModel {
     required this.usdPrice,
     required this.high24h,
     required this.low24h,
+    required this.price_change_percentage_24h,
   });
 
   factory TradeViewModel.fromJson(Map<String, dynamic> json) {
@@ -23,6 +25,7 @@ class TradeViewModel {
       usdPrice: json['market_data']['current_price']['usd'].toDouble(),
       high24h: json['market_data']['high_24h']['usd'].toDouble(),
       low24h: json['market_data']['low_24h']['usd'].toDouble(),
+      price_change_percentage_24h: json['market_data']['price_change_percentage_24h'].toDouble(),
     );
   }
 
