@@ -5,9 +5,11 @@ import 'package:lnwCoin/view/trade/components/chart2.dart';
 import 'package:flutter/material.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:lottie/lottie.dart';
+import 'package:lnwCoin/model/watchlistProvider.dart';
 import '../../model/market_model.dart';
 import '../../utils/constants.dart';
 import '../../utils/extensions/lottie_extension.dart';
+
 
 part 'components/price_label.dart';
 part 'components/app_bar.dart';
@@ -40,11 +42,7 @@ class _TradeViewState extends State<TradeView> with TickerProviderStateMixin {
     super.initState();
   }
 
-  @override
-  void dispose() {
-    _animationController.dispose();
-    super.dispose();
-  }
+
 
   @override
   Widget build(BuildContext context) {
@@ -77,10 +75,11 @@ class _TradeViewState extends State<TradeView> with TickerProviderStateMixin {
                   } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
                     return Center(child: Text('No data available'));
                   } else {
-                    // print(snapshot.data);
+                    // print("Here:");
+                    // print(widget.id);
                     return Column(
                       children: [
-                        AppBarWithStar(symbol: widget.symbol),
+                        AppBarWithStar(symbol: widget.symbol,id: widget.id),
                         Image.asset(
                           "assets/icon/960x960.png",
                           height: 100,

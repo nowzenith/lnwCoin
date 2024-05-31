@@ -1,8 +1,10 @@
 part of 'package:lnwCoin/view/trade/trade_view.dart';
 
+
 class AppBarWithStar extends StatefulWidget {
   final String symbol;
-  const AppBarWithStar({super.key, required this.symbol});
+  final String id;
+  const AppBarWithStar({super.key, required this.symbol, required this.id});
 
   @override
   // ignore: library_private_types_in_public_api
@@ -10,7 +12,14 @@ class AppBarWithStar extends StatefulWidget {
 }
 
 class _AppBarWithStarState extends State<AppBarWithStar> {
-  bool _isStarred = false;
+  late bool _isStarred;
+
+  @override
+  void initState() {
+    super.initState();
+    _isStarred = watchListProvider().watchlist.contains(widget.id);
+    print(_isStarred);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -35,6 +44,13 @@ class _AppBarWithStarState extends State<AppBarWithStar> {
             onTap: () {
               setState(() {
                 _isStarred = !_isStarred;
+                if(_isStarred){
+                  watchListProvider().watchlist.add(widget.id);
+                  print(watchListProvider().watchlist);
+                } else {
+                  watchListProvider().watchlist.remove(widget.id);
+                  print(watchListProvider().watchlist);
+                }
               });
             },
             child: Icon(
