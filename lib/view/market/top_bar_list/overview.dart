@@ -4,8 +4,6 @@ import 'package:lnwCoin/service/coingecko/coingecko_api.dart';
 import 'dart:convert';
 import 'package:http/http.dart' as http;
 
-late double percent;
-
 class OverviewPage extends StatefulWidget {
   @override
   _OverviewPageState createState() => _OverviewPageState();
@@ -20,19 +18,7 @@ class _OverviewPageState extends State<OverviewPage> {
     super.initState();
 
     futureMarketCapChangePercentage = CoinGeckoApi().fetchMarketCapChangePercentage();
-    futureMarketCapChangePercentage.then((value) {
-      print('Market Cap Change Percentage (24h USD): $value');
-      percent = value;
-    }).catchError((error) {
-      print('Error fetching data: $error');
-    });
-
     futureMarketCapChart = CoinGeckoApi().fetchMarketCapChart();
-    futureMarketCapChart.then((value) {
-      print('Market Cap Chart Data: $value');
-    }).catchError((error) {
-      print('Error fetching data: $error');
-    });
   }
 
   @override
@@ -41,8 +27,23 @@ class _OverviewPageState extends State<OverviewPage> {
       children: <Widget>[
         HalvingCountdown(),
         SizedBox(height: 16),
-        MarketCapChartWidget(
-          futureMarketCapChart: futureMarketCapChart,
+        FutureBuilder<double>(
+          future: futureMarketCapChangePercentage,
+          builder: (context, snapshot) {
+            if (snapshot.connectionState == ConnectionState.waiting) {
+              return CircularProgressIndicator();
+            } else if (snapshot.hasError) {
+              return Text('Error fetching data: ${snapshot.error}');
+            } else if (snapshot.hasData) {
+              final percent = snapshot.data!;
+              return MarketCapChartWidget(
+                futureMarketCapChart: futureMarketCapChart,
+                percent: percent,
+              );
+            } else {
+              return Text('No data available');
+            }
+          },
         ),
         // ... other widgets ...
       ],
@@ -83,8 +84,9 @@ class HalvingCountdown extends StatelessWidget {
 
 class MarketCapChartWidget extends StatelessWidget {
   final Future<List<FlSpot>> futureMarketCapChart;
+  final double percent;
 
-  MarketCapChartWidget({required this.futureMarketCapChart});
+  MarketCapChartWidget({required this.futureMarketCapChart, required this.percent});
 
   @override
   Widget build(BuildContext context) {
@@ -110,7 +112,6 @@ class MarketCapChartWidget extends StatelessWidget {
           SizedBox(height: 4),
           Text(
             '${percent.toStringAsFixed(2)}%',
-            // You might want to make this dynamic based on data
             style: TextStyle(
                 color: percent >= 0 ? Colors.greenAccent : Colors.redAccent,
                 fontSize: 18,
@@ -154,4 +155,3 @@ class MarketCapChartWidget extends StatelessWidget {
     );
   }
 }
-
