@@ -6,7 +6,6 @@ import 'package:flutter/material.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:lottie/lottie.dart';
 import 'package:lnwCoin/model/watchlistProvider.dart';
-import '../../model/market_model.dart';
 import '../../utils/constants.dart';
 import '../../utils/extensions/lottie_extension.dart';
 

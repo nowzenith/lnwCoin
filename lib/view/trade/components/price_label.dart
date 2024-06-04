@@ -26,7 +26,7 @@ class _PriceLabel extends StatelessWidget {
               const SizedBox(width: 10),
               Container(
                 height: 30,
-                width: 60,
+                width: 80,
                 decoration: BoxDecoration(
                   color: isMinus
                       ? Colors.redAccent.shade400

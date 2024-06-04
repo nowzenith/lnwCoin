@@ -36,7 +36,7 @@ class _AppBarWithStarState extends State<AppBarWithStar> {
             ),
           ),
           Text(
-            widget.symbol,
+            widget.symbol.toUpperCase(),
             style: const TextStyle(
                 color: Colors.white, fontSize: 20, fontWeight: FontWeight.bold),
           ),
