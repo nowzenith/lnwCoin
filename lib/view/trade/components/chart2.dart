@@ -28,7 +28,7 @@ class _Chart2State extends State<Chart2> {
   <div class="tradingview-widget-copyright"><a href="https://www.tradingview.com/" rel="noopener nofollow" target="_blank"><span class="blue-text">Track all markets on TradingView</span></a></div>
   <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-advanced-chart.js" async>
       {
-        "height": "600",
+        "height": "800",
         "symbol": "CRYPTOCAP:$name",
         "interval": "D",
         "timezone": "Etc/UTC",
@@ -74,7 +74,7 @@ class _Chart2State extends State<Chart2> {
   Widget build(BuildContext context) {
     return Container(
       width: double.infinity,
-      height: 600,
+      height: 800,
       child: WebViewWidget(
           controller: controller,
         ),

@@ -79,10 +79,10 @@ class _TradeViewState extends State<TradeView> with TickerProviderStateMixin {
                     return Column(
                       children: [
                         AppBarWithStar(symbol: widget.symbol,id: widget.id),
-                        Image.asset(
-                          "assets/icon/960x960.png",
-                          height: 100,
-                        ),
+                        // Image.asset(
+                        //   "assets/icon/960x960.png",
+                        //   height: 100,
+                        // ),
                         _PriceLabel(price: snapshot.data.usdPrice,price_change_percentage_24h: snapshot.data.price_change_percentage_24h,),
                         Chart2(name: snapshot.data.symbol),
                         // _InfoBody(candle: candle),
