@@ -100,7 +100,7 @@ class _ExchangePageState extends State<ExchangePage>
                             flex: 3,
                             child: Center(
                               child: Text(
-                                'Change',
+                                'Score',
                                 style: TextStyle(
                                   fontSize: 16,
                                   fontWeight: FontWeight.bold,
