@@ -56,17 +56,78 @@ class _DerivativesPageState extends State<DerivativesPage> with TickerProviderSt
             ),
           );
         } else if (snapshot.hasData) {
-          return ListView.builder(
-            itemCount: snapshot.data!.length,
-            itemBuilder: (context, index) {
-              print(snapshot.data![index]);
-              var dataJson = Map<String, dynamic>.from(snapshot.data![index]);
-              var data = DerivativesModel
-                  .fromJson(dataJson); // Correctly converts to CryptoCategory
-              return NftCard(
-                data: data,
-              );
-            },
+          return Column(
+            children: [
+              Container(
+                    height: 50,
+                    child: const Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 5),
+                      child: Card(
+                        color: Color.fromARGB(53, 30, 42, 56),
+                        child: Padding(
+                          padding: EdgeInsets.all(8.0),
+                          child: Row(
+                            children: [
+                              Expanded(
+                                flex: 5,
+                                child: Center(
+                                  child: Text(
+                                    'Exchange',
+                                    style: TextStyle(
+                                      fontSize: 16,
+                                      fontWeight: FontWeight.bold,
+                                      color: Colors.white,
+                                    ),
+                                  ),
+                                ),
+                              ),
+                              Expanded(
+                                flex: 3,
+                                child: Center(
+                                  child: Text(
+                                    '24h Open',
+                                    style: TextStyle(
+                                      fontSize: 16,
+                                      fontWeight: FontWeight.bold,
+                                      color: Colors.white,
+                                    ),
+                                  ),
+                                ),
+                              ),
+                              Expanded(
+                                flex: 3,
+                                child: Center(
+                                  child: Text(
+                                    '24h Volume',
+                                    style: TextStyle(
+                                      fontSize: 16,
+                                      fontWeight: FontWeight.bold,
+                                      color: Colors.white,
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+              Expanded(
+                child: ListView.builder(
+                  itemCount: snapshot.data!.length,
+                  itemBuilder: (context, index) {
+                    print(snapshot.data![index]);
+                    var dataJson = Map<String, dynamic>.from(snapshot.data![index]);
+                    var data = DerivativesModel
+                        .fromJson(dataJson); // Correctly converts to CryptoCategory
+                    return NftCard(
+                      data: data,
+                    );
+                  },
+                ),
+              ),
+            ],
           );
         } else if (snapshot.hasError) {
           return Center(child: Text('Error: ${snapshot.error}'));
@@ -95,7 +156,7 @@ class NftCard extends StatelessWidget {
 
           },
           child: Card(
-              color: Colors.white.withOpacity(0.5),
+              color: Color(0x1E2A38).withOpacity(0.5),
               child: Padding(
                 padding: const EdgeInsets.all(16.0),
                 child: Row(
@@ -123,7 +184,7 @@ class NftCard extends StatelessWidget {
                       flex: 3,
                       child: Center(
                         child: Text(
-                          "\$${NumberFormat('#,##0.##', 'en_US').format(data.openInterestBtc)}",
+                          "\₿${NumberFormat('#,##0.##', 'en_US').format(data.openInterestBtc)}",
                           style: const TextStyle(
                               fontSize: 16, color: Colors.white),
                         ),
@@ -140,10 +201,9 @@ class NftCard extends StatelessWidget {
                           child: Center(
                             child: 
                                 Text(
-                                    '\$${NumberFormat('#,##0.##', 'en_US').format(data.tradeVolume24hBtc)}',
+                                    '\₿${NumberFormat('#,##0.##', 'en_US').format(data.tradeVolume24hBtc)}',
                                     style: TextStyle(
                                       color: Colors.white,
-                                      fontWeight: FontWeight.bold,
                                       fontSize: 14
                                     ),
                                   ),

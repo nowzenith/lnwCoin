@@ -166,7 +166,7 @@ class MyCustomWidget extends StatelessWidget {
                 style: TextStyle(color: Colors.white, fontSize: 18),
               ),
               Text(
-                '\$${category.volume24h.toStringAsFixed(2)}',
+                '\$${getFormattedMarketCap(category.volume24h)}',
                 style: const TextStyle(color: Colors.white, fontSize: 18),
               ),
             ],

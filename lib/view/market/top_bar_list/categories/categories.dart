@@ -115,7 +115,7 @@ class CryptoCategoryCard extends StatelessWidget {
         );
       },
       child: Card(
-        color: Colors.grey[850], // Dark card background
+        color: Color(0x1E2A38).withOpacity(0.5), // Dark card background
         margin: const EdgeInsets.all(8),
         child: Padding(
           padding: const EdgeInsets.all(16.0),

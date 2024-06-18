@@ -27,7 +27,7 @@ class _MarketDataCard extends StatelessWidget {
             );
           },
           child: Card(
-              color: Colors.white.withOpacity(0.5),
+              color: Color(0x1E2A38).withOpacity(0.5),
               child: Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: Row(

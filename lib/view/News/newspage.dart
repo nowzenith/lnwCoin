@@ -179,7 +179,7 @@ class MyNewsCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Card(
-      color: Colors.grey[850], // Card widget background color
+      color: Color(0x1E2A38).withOpacity(0.5), // Card widget background color
       margin: const EdgeInsets.all(8),
       child: ListTile(
         leading: Container(
@@ -271,7 +271,7 @@ class MyNewsCard extends StatelessWidget {
 //         itemBuilder: (context, index) {
 //           final newsItem = mockCryptoNews[index];
 //           return Card(
-//             color: Colors.grey[850], // Card widget background color
+//             color: Color(0x1E2A38).withOpacity(0.5), // Card widget background color
 //             margin: EdgeInsets.all(8),
 //             child: ListTile(
 //               leading: Image.network(

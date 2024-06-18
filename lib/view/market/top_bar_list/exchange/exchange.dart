@@ -58,17 +58,79 @@ class _ExchangePageState extends State<ExchangePage>
             ),
           );
         } else if (snapshot.hasData) {
-          return ListView.builder(
-            itemCount: snapshot.data!.length,
-            itemBuilder: (context, index) {
-              print(snapshot.data![index]);
-              var dataJson = Map<String, dynamic>.from(snapshot.data![index]);
-              var data = Exchange.fromJson(
-                  dataJson); // Correctly converts to CryptoCategory
-              return NftCard(
-                data: data,
-              );
-            },
+          return Column(
+            children: [
+              Container(
+                height: 50,
+                child: const Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 5),
+                  child: Card(
+                    color: Color.fromARGB(53, 30, 42, 56),
+                    child: Padding(
+                      padding: EdgeInsets.all(8.0),
+                      child: Row(
+                        children: [
+                          Expanded(
+                            flex: 7,
+                            child: Center(
+                              child: Text(
+                                'Exchange',
+                                style: TextStyle(
+                                  fontSize: 16,
+                                  fontWeight: FontWeight.bold,
+                                  color: Colors.white,
+                                ),
+                              ),
+                            ),
+                          ),
+                          Expanded(
+                            flex: 3,
+                            child: Center(
+                              child: Text(
+                                '24h Volume',
+                                style: TextStyle(
+                                  fontSize: 15,
+                                  fontWeight: FontWeight.bold,
+                                  color: Colors.white,
+                                ),
+                              ),
+                            ),
+                          ),
+                          Expanded(
+                            flex: 3,
+                            child: Center(
+                              child: Text(
+                                'Change',
+                                style: TextStyle(
+                                  fontSize: 16,
+                                  fontWeight: FontWeight.bold,
+                                  color: Colors.white,
+                                ),
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+              Expanded(
+                child: ListView.builder(
+                  itemCount: snapshot.data!.length,
+                  itemBuilder: (context, index) {
+                    print(snapshot.data![index]);
+                    var dataJson =
+                        Map<String, dynamic>.from(snapshot.data![index]);
+                    var data = Exchange.fromJson(
+                        dataJson); // Correctly converts to CryptoCategory
+                    return NftCard(
+                      data: data,
+                    );
+                  },
+                ),
+              ),
+            ],
           );
         } else if (snapshot.hasError) {
           return Center(child: Text('Error: ${snapshot.error}'));
@@ -96,7 +158,7 @@ class NftCard extends StatelessWidget {
         child: InkWell(
           onTap: () {},
           child: Card(
-              color: Colors.white.withOpacity(0.5),
+              color: Color(0x1E2A38).withOpacity(0.5),
               child: Padding(
                 padding: const EdgeInsets.all(16.0),
                 child: Row(
