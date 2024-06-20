@@ -3,20 +3,24 @@ import 'package:fl_chart/fl_chart.dart';
 import 'package:lnwCoin/service/coingecko/coingecko_api.dart';
 import 'dart:convert';
 import 'package:http/http.dart' as http;
+import 'package:lnwCoin/utils/extensions/lottie_extension.dart';
+import 'package:lottie/lottie.dart';
 
 class OverviewPage extends StatefulWidget {
   @override
   _OverviewPageState createState() => _OverviewPageState();
 }
 
-class _OverviewPageState extends State<OverviewPage> {
+class _OverviewPageState extends State<OverviewPage> with TickerProviderStateMixin {
   late Future<double> futureMarketCapChangePercentage;
   late Future<List<FlSpot>> futureMarketCapChart;
+  late AnimationController _animationController;
 
   @override
   void initState() {
     super.initState();
-
+     _animationController = AnimationController(
+        vsync: this, duration: const Duration(milliseconds: 3000));
     futureMarketCapChangePercentage = CoinGeckoApi().fetchMarketCapChangePercentage();
     futureMarketCapChart = CoinGeckoApi().fetchMarketCapChart();
   }
@@ -31,7 +35,19 @@ class _OverviewPageState extends State<OverviewPage> {
           future: futureMarketCapChangePercentage,
           builder: (context, snapshot) {
             if (snapshot.connectionState == ConnectionState.waiting) {
-              return CircularProgressIndicator();
+              return Center(
+              child: LottieBuilder.asset(
+                LottieEnum.loading.lottiePath,
+                height: 80,
+                width: 80,
+                repeat: true,
+                animate: true,
+                controller: _animationController,
+                onLoaded: (p0) {
+                  _animationController.forward();
+                },
+              ),
+            );
             } else if (snapshot.hasError) {
               return Text('Error fetching data: ${snapshot.error}');
             } else if (snapshot.hasData) {

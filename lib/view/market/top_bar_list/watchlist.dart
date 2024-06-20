@@ -61,20 +61,94 @@ class _WatchlistPageState extends State<WatchlistPage> with TickerProviderStateM
           builder: (context, AsyncSnapshot snapshot) {
             if (snapshot.hasData) {
               List<CryptoCurrency> coins = snapshot.data;
-              return ListView.separated(
-                itemBuilder: (context, index) {
-                  return MarketDataCard(
-                    marketViewModel: marketViewModel,
-                    index: index,
-                    coins: coins,
-                    function: () {
-                      _timer?.cancel();
-                    },
-                  );
-                },
-                separatorBuilder: (context, index) =>
-                    const SizedBox(height: 6),
-                itemCount: coins.length,
+              return Column(
+                children: [
+                  Container(
+                    height: 50,
+                    child: const Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 15),
+                      child: Card(
+                        color: Color.fromARGB(53, 30, 42, 56),
+                        child: Padding(
+                          padding: EdgeInsets.all(8.0),
+                          child: Row(
+                            children: [
+                              Expanded(
+                                flex: 3,
+                                child: Center(
+                                  child: Text(
+                                    'Coin',
+                                    style: TextStyle(
+                                      fontSize: 16,
+                                      fontWeight: FontWeight.bold,
+                                      color: Colors.white,
+                                    ),
+                                  ),
+                                ),
+                              ),
+                              Expanded(
+                                flex: 3,
+                                child: Center(
+                                  child: Text(
+                                    '7d Chart',
+                                    style: TextStyle(
+                                      fontSize: 16,
+                                      fontWeight: FontWeight.bold,
+                                      color: Colors.white,
+                                    ),
+                                  ),
+                                ),
+                              ),
+                              Expanded(
+                                flex: 3,
+                                child: Center(
+                                  child: Text(
+                                    'Price',
+                                    style: TextStyle(
+                                      fontSize: 16,
+                                      fontWeight: FontWeight.bold,
+                                      color: Colors.white,
+                                    ),
+                                  ),
+                                ),
+                              ),
+                              Expanded(
+                                flex: 2,
+                                child: Center(
+                                  child: Text(
+                                    'Change',
+                                    style: TextStyle(
+                                      fontSize: 18,
+                                      fontWeight: FontWeight.bold,
+                                      color: Colors.white,
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+                  Expanded(
+                    child: ListView.separated(
+                      itemBuilder: (context, index) {
+                        return MarketDataCard(
+                          marketViewModel: marketViewModel,
+                          index: index,
+                          coins: coins,
+                          function: () {
+                            _timer?.cancel();
+                          },
+                        );
+                      },
+                      separatorBuilder: (context, index) =>
+                          const SizedBox(height: 6),
+                      itemCount: coins.length,
+                    ),
+                  ),
+                ],
               );
             }
             return Center(
