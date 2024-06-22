@@ -8,6 +8,8 @@ import 'package:lnwCoin/model/tradeview_model.dart';
 import 'package:lnwCoin/model/trading_model.dart';
 import 'package:fl_chart/fl_chart.dart';
 
+import '../../view/market/top_bar_list/overview.dart';
+
 class CoinGeckoApi {
   static const String baseUrl = 'https://pro-api.coingecko.com/api/v3';
   static const Map<String, String> headers = {
@@ -143,29 +145,30 @@ class CoinGeckoApi {
     }
   }
 
-  Future<List<FlSpot>> fetchMarketCapChart() async {
-    var url = Uri.parse('$baseUrl/global/market_cap_chart?days=180');
+  Future<List<ChartData>> fetchMarketCapChart() async {
+    var url = Uri.parse('$baseUrl/global/market_cap_chart?days=1');
     var response = await http.get(url, headers: headers);
 
     if (response.statusCode == 200) {
-      Map<String, dynamic> responseData = json.decode(response.body)['market_cap_chart'];
+      Map<String, dynamic> responseData =
+      json.decode(response.body)['market_cap_chart'];
       List<dynamic> marketCapData = responseData['market_cap'];
-      List<FlSpot> spots = marketCapData.map((dataPoint) {
-        double x = dataPoint[0].toDouble(); // Direct cast to double
-        double y = dataPoint[1].toDouble(); // Direct cast to double
-        return FlSpot(x, y);
+
+      List<ChartData> chartData = marketCapData.map((dataPoint) {
+        int timestamp = dataPoint[0];
+        double price = dataPoint[1].toDouble();
+        DateTime date = DateTime.fromMillisecondsSinceEpoch(timestamp);
+
+        return ChartData(date, price);
       }).toList();
 
-      // Print the response data for debugging
-      print('Market Cap Chart Data: $spots');
-
-      return spots;
+      return chartData;
     } else {
-      // Print error message if request fails
       print('Failed to load market data. Status Code: ${response.statusCode}');
       throw Exception('Failed to load market data');
     }
   }
+
 
   Future<List<CryptoCurrency>> fetchWatchlist(List<String> ids) async {
   String idsParam = ids.join('%2C');
