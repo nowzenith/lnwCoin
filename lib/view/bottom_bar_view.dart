@@ -21,7 +21,7 @@ class BottomBarView extends StatelessWidget {
     NewsFeedPage(),
     const SearchPage(),
     const MyWalletView(),
-    CommunityBlockPage(),
+    CommunityPage(),
   ];
 
   @override
@@ -36,6 +36,7 @@ class BottomBarView extends StatelessWidget {
           builder: (context, bottomBarViewModel, child) {
             return Scaffold(
               body: pages[bottomBarViewModel.index],  // Using the index from ViewModel
+              backgroundColor: const Color.fromARGB(255, 24, 24, 24),
               bottomNavigationBar: CurvedNavigationBar(
                 index: bottomBarViewModel.index,
                 backgroundColor: const Color.fromARGB(255, 24, 24, 24),

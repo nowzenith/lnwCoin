@@ -19,9 +19,9 @@ class Metaverse_page extends StatelessWidget {
               ),
               FilledButton(
                 onPressed: () {},
-                child: const Text('Soon'),
+                child: const Text('Soon',style: TextStyle(color: Colors.grey),),
                 style: FilledButton.styleFrom(
-                    backgroundColor: Color.fromARGB(255, 170, 0, 28)),
+                    backgroundColor: Color.fromARGB(194, 170, 0, 28)),
               ),
             ],
           ),
