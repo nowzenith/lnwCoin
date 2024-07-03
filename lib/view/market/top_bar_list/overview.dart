@@ -43,7 +43,7 @@ class _OverviewPageState extends State<OverviewPage>
   Widget build(BuildContext context) {
     return ListView(
       children: <Widget>[
-        HalvingCountdown(),
+        // HalvingCountdown(),
         SizedBox(height: 16),
         FutureBuilder<double>(
           future: futureMarketCapChangePercentage,
