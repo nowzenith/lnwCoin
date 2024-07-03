@@ -206,7 +206,7 @@ class NftCard extends StatelessWidget {
                           child: Center(
                             child: isMinus
                                 ? Text(
-                                    NumberFormat('#,##0.##', 'en_US').format(data.marketCapUsd24hPercentageChange),
+                                    '${NumberFormat('#,##0.##', 'en_US').format(data.marketCapUsd24hPercentageChange)}%',
                                     style: TextStyle(
                                       color: Colors.white,
                                       fontWeight: FontWeight.bold,
