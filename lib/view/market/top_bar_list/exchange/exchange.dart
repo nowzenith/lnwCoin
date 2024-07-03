@@ -3,12 +3,10 @@ import 'package:intl/intl.dart';
 import 'package:lnwCoin/model/exchange.dart';
 
 import 'package:lnwCoin/model/market_model.dart';
-import 'package:lnwCoin/model/nft_model.dart';
 import 'package:lnwCoin/service/coingecko/coingecko_api.dart';
 import 'package:lnwCoin/utils/extensions/lottie_extension.dart';
 import 'package:lnwCoin/view_model/market_view_model.dart';
 import 'package:lottie/lottie.dart';
-import 'package:provider/provider.dart';
 part 'market_data_card.dart';
 
 class ExchangePage extends StatefulWidget {

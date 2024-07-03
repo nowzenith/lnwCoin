@@ -3,11 +3,11 @@ import 'package:lnwCoin/utils/dummy/dummy_news.dart';
 import 'package:lnwCoin/view/internet/no_internet.dart';
 import 'package:lnwCoin/view/market/components/Topbar.dart';
 import 'package:lnwCoin/view/market/components/market_stat.dart';
+import 'package:lnwCoin/view/market/top_bar_list/99_RWA_Coin/rwa_coin.dart';
 import 'package:lnwCoin/view/market/top_bar_list/categories/categories.dart';
 import 'package:lnwCoin/view/market/top_bar_list/Derivatives/Derivatives.dart';
 import 'package:lnwCoin/view/market/top_bar_list/coin.dart';
 import 'package:lnwCoin/view/market/top_bar_list/exchange/exchange.dart';
-import 'package:lnwCoin/view/market/top_bar_list/metaverse.dart';
 import 'package:lnwCoin/view/market/top_bar_list/nft/nft.dart';
 import 'package:lnwCoin/view/market/top_bar_list/overview.dart';
 import 'package:lnwCoin/view/market/top_bar_list/watchlist.dart';
@@ -65,7 +65,7 @@ class _MarketViewState extends State<MarketView> with TickerProviderStateMixin {
     const ExchangePage(),
     const DerivativesPage(),
     const CategoriesPage(),
-    const Metaverse_page(),
+    const Rwa_Coin(),
   ];
 
   @override

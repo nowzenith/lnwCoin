@@ -38,6 +38,7 @@ class BottomBarView extends StatelessWidget {
               body: pages[bottomBarViewModel.index],  // Using the index from ViewModel
               backgroundColor: const Color.fromARGB(255, 24, 24, 24),
               bottomNavigationBar: CurvedNavigationBar(
+                height: 70,
                 index: bottomBarViewModel.index,
                 backgroundColor: const Color.fromARGB(255, 24, 24, 24),
                 buttonBackgroundColor: const Color.fromARGB(255, 170, 0, 28),

@@ -119,6 +119,7 @@ flutter:
     - assets/logo/owncoin/
     - assets/icon/
     - assets/videos/
+    - assets/rwacoin/
 
   fonts:
     - family: "MontserratAlternates"
