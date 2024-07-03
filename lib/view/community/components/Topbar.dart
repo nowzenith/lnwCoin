@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 
 class TopBarWidget extends StatefulWidget {
   final TabController tabController;
@@ -23,15 +24,37 @@ class _TopBarWidgetState extends State<TopBarWidget> {
             color: Colors.transparent,
             child: TabBar(
                 controller: widget.tabController,
-                isScrollable: true,
+                isScrollable: false,
                 labelPadding: const EdgeInsets.fromLTRB(10, 0, 10, 0),
+                labelColor: const Color.fromARGB(255, 170, 0, 28),
+                unselectedLabelColor: Colors.white,
+                indicatorSize: TabBarIndicatorSize.label,
+                indicator: const BoxDecoration(
+                    borderRadius: BorderRadius.only(
+                        topLeft: Radius.circular(10),
+                        topRight: Radius.circular(10)),
+                    color: Colors.white),
                 tabs: const [
-                  Tab(text: 'Metaverse'),
-                  Tab(text: 'Game'),
-                  Tab(text: 'Post'),
+                  Tab(
+                    child: Align(
+                      alignment: Alignment.center,
+                      child: Text("Metaverse"),
+                    ),
+                  ),
+                  Tab(
+                    child: Align(
+                      alignment: Alignment.center,
+                      child: Text("Game"),
+                    ),
+                  ),
+                  Tab(
+                    child: Align(
+                      alignment: Alignment.center,
+                      child: Text("Post"),
+                    ),
+                  ),
                 ],
-                labelColor: Colors.white,
-                indicatorColor: Color.fromARGB(255, 170, 0, 28)),
+                indicatorColor: const Color.fromARGB(255, 170, 0, 28)),
           ),
           // This Expanded widget lets the TabBarView take up the remaining space.
           Expanded(
