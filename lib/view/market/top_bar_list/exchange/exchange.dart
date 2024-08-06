@@ -36,6 +36,20 @@ class _ExchangePageState extends State<ExchangePage>
     super.dispose();
   }
 
+  List<Exchange> cleanseData(List<dynamic> rawData) {
+    List<Exchange> exchanges = rawData.map((dataJson) => Exchange.fromJson(Map<String, dynamic>.from(dataJson))).toList();
+
+    for (int i = 1; i < exchanges.length - 1; i++) {
+      if (exchanges[i - 1].trustScore == exchanges[i + 1].trustScore && 
+          exchanges[i].trustScore != exchanges[i - 1].trustScore) {
+        exchanges[i].trustScore = exchanges[i - 1].trustScore;
+      }
+    }
+
+    return exchanges;
+  }
+
+
   @override
   Widget build(BuildContext context) {
     return FutureBuilder<List<dynamic>>(
@@ -56,11 +70,13 @@ class _ExchangePageState extends State<ExchangePage>
             ),
           );
         } else if (snapshot.hasData) {
+          List<Exchange> cleanedExchanges = cleanseData(snapshot.data!);
+          int? old_data = 10;
           return Column(
             children: [
               Container(
                 height: 50,
-                child: const Padding(
+                child: Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 5),
                   child: Card(
                     color: Color.fromARGB(53, 30, 42, 56),
@@ -97,13 +113,73 @@ class _ExchangePageState extends State<ExchangePage>
                           Expanded(
                             flex: 3,
                             child: Center(
-                              child: Text(
-                                'Score',
-                                style: TextStyle(
-                                  fontSize: 16,
-                                  fontWeight: FontWeight.bold,
-                                  color: Colors.white,
-                                ),
+                              child: Row(
+                                mainAxisSize: MainAxisSize
+                                    .min, // Center-align the row's content
+                                children: [
+                                  Text(
+                                    'Score',
+                                    style: TextStyle(
+                                      fontSize: 16,
+                                      fontWeight: FontWeight.bold,
+                                      color: Colors.white,
+                                    ),
+                                  ),
+                                  SizedBox(
+                                      width:
+                                          4), // Add some space between the text and the icon
+                                  GestureDetector(
+                                    onTap: () {
+                                      showDialog(
+                                        context: context,
+                                        builder: (BuildContext context) {
+                                          return Theme(
+                                            data: ThemeData.dark().copyWith(
+                                              dialogBackgroundColor: Colors
+                                                  .grey[900], // Dark background
+                                              textTheme: TextTheme(
+                                                titleLarge: TextStyle(
+                                                    color: Colors.white,
+                                                    fontWeight: FontWeight
+                                                        .bold), // Title text style
+                                                bodyMedium: TextStyle(
+                                                    color: Colors
+                                                        .white70), // Content text style
+                                              ),
+                                              dialogTheme: DialogTheme(
+                                                shape: RoundedRectangleBorder(
+                                                  borderRadius:
+                                                      BorderRadius.circular(
+                                                          8.0),
+                                                ),
+                                              ),
+                                            ),
+                                            child: AlertDialog(
+                                              title: Text(
+                                                  'Trust Score Information'),
+                                              content: Text(
+                                                'Trust Score is a rating algorithm developed by CoinGecko to evaluate the legitimacy of an exchange’s trading volume. Trust Score is calculated on a range of metrics such as liquidity, scale of operations, cybersecurity score, and more.',
+                                              ),
+                                              actions: [
+                                                TextButton(
+                                                  child: Text('Close'),
+                                                  onPressed: () {
+                                                    Navigator.of(context).pop();
+                                                  },
+                                                ),
+                                              ],
+                                            ),
+                                          );
+                                        },
+                                      );
+                                    },
+                                    child: Icon(
+                                      Icons.info_outline,
+                                      color: Colors.white,
+                                      size: 16, // Adjust the size of the icon
+                                    ),
+                                  ),
+                                ],
                               ),
                             ),
                           ),
@@ -115,16 +191,25 @@ class _ExchangePageState extends State<ExchangePage>
               ),
               Expanded(
                 child: ListView.builder(
-                  itemCount: snapshot.data!.length,
+                  itemCount: cleanedExchanges.length,
                   itemBuilder: (context, index) {
-                    print(snapshot.data![index]);
-                    var dataJson =
-                        Map<String, dynamic>.from(snapshot.data![index]);
-                    var data = Exchange.fromJson(
-                        dataJson); // Correctly converts to CryptoCategory
-                    return NftCard(
-                      data: data,
-                    );
+                    var data = cleanedExchanges[index];
+                    Widget card = NftCard(data: data);
+
+                    if (index > 0 && old_data != null && old_data != data.trustScore) {
+                      old_data = data.trustScore;
+                      return Column(
+                        children: [
+                          Padding(
+                            padding: const EdgeInsets.only(left: 16, right: 16),
+                            child: Divider(height: 10),
+                          ),
+                          card,
+                        ],
+                      );
+                    }
+
+                    return card;
                   },
                 ),
               ),
@@ -184,7 +269,7 @@ class NftCard extends StatelessWidget {
                       flex: 3,
                       child: Center(
                         child: Text(
-                          "\$${NumberFormat('#,##0.##', 'en_US').format(data.tradeVolume24hBtc)}",
+                          "\$${NumberFormat('#,##0.##', 'en_US').format(data.tradeVolume24hBtcNormalized)}",
                           style: const TextStyle(
                               fontSize: 16, color: Colors.white),
                         ),
